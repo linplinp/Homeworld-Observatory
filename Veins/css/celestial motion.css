@@ -1,0 +1,179 @@
+.orbit-container-1{
+    position: fixed;
+    top: 16vh;
+    right: 20vw;
+    z-index: 1;
+    opacity: 1;
+    visibility: visible;
+    scale: 1 ;
+    transition: opacity .3s ease,
+                scale .1s ease;
+    pointer-events: none;
+}
+
+.orbit-container-2{
+    position: fixed;
+    right: 100vw;
+    bottom: 160vh;
+    z-index: 1;
+    scale: 1 ;
+    transition: opacity .3s ease,
+                scale .1s ease;
+    pointer-events: none;
+}
+
+.magic-circle{
+    position: fixed;
+    top: -25vh;
+    left: -13vw;
+
+}
+
+.mc-01{
+    position: absolute;
+    top: 0vh;
+    right: -6vw;
+    z-index: 1;
+    visibility: hidden;
+    scale: 1.7 ;
+    opacity: 0;
+    transition: opacity .3s ease,
+                top 0.7s cubic-bezier(.67,0,.34,1.01);
+    pointer-events: none;
+}
+
+.mc-01-p1{
+    position: absolute;
+    top: 6.4rem;
+    left: 6.8rem;
+    width: 15rem;
+    height: 15rem;
+    filter: brightness(2);
+    animation: move_ball var(--speed) linear infinite; 
+}
+
+.mc-01-p2{
+    position: absolute;
+    top: 15.2rem;
+    left: 15.6rem;
+    width: 7rem;
+    height: 7rem;
+    filter: brightness(2);
+    animation: move_ball var(--speed) linear infinite; 
+}
+
+.mc-01-p3{
+    position: absolute;
+    top: 3.9rem;
+    left: 4rem;
+    width: 30rem;
+    height: 30rem;
+    filter: brightness(2);
+    animation: move_ball var(--speed) linear infinite; 
+}
+
+.mc-01-p4{
+    position: absolute;
+    top: 16rem;
+    left: 17rem;
+    width: 15rem;
+    height: 15rem;
+    filter: brightness(2);
+    animation: move_ball var(--speed) linear infinite; 
+}
+
+.mc-01-p5{
+    position: absolute;
+    top: 12.8rem;
+    left: 13.1rem;
+    width: 12rem;
+    height: 12rem;
+    filter: brightness(2);
+    animation: move_ball var(--speed) linear infinite; 
+}
+
+.orbit-group {
+    opacity: var(--orbit-opacity);
+    transform:skewX(var(--skew));
+    pointer-events: none;   
+}
+
+.move-ball-loader {
+    position: relative;
+}
+
+
+.ball-ring {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    border: var(--ring-border) solid rgba(221, 207, 102, 0.909);
+    box-shadow: 0px 0px 18px 0px rgba(255, 236, 95, 0.687);
+    border-radius: 50%;
+    top: 54vh;
+    left: 50%;
+    transform: translate(var(--translateX),-50%) ;
+    animation: opacity_pulse 5s infinite alternate;
+}
+
+
+.ball-holder {
+    position: absolute;
+    inset: 0; 
+    width:100%;
+    height:100%;
+    left: 0;
+    top: 0;
+    animation: move_ball var(--speed) linear infinite; 
+}
+
+
+.ball-holder .ball {
+    position: absolute;
+    left: 50%;
+    top: var(--dist); 
+    transform: translateX(-50%);
+    width: var(--ball-size);
+    height: var(--ball-size);
+    background: linear-gradient(135deg,rgb(230, 218, 127),rgba(188, 172, 31, 0.192));
+    background-blend-mode: lighten;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(0,0,0,0.08);
+}
+
+
+@keyframes move_ball {
+    0%   { transform: rotate(0deg); 
+            opacity: 1;
+    }
+
+    25%{ transform: rotate(90deg); 
+            opacity: 0.3;
+    }
+
+    50% { transform: rotate(180deg); 
+            opacity: 1;
+    }
+
+    75% { transform: rotate(270deg); 
+            opacity: 0.3;
+    }
+
+    100% { transform: rotate(360deg); 
+            opacity: 1;
+    }
+
+}
+
+@keyframes opacity_pulse {
+    0% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 0.9;
+    }
+}

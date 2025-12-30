@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>母星-燈塔</title>
+    <link rel="icon" href="index/icon/灯塔_light-house.svg" type="index/image/png">
+    <link rel="stylesheet" href="index/css/particle.css">
+    <link rel="stylesheet" href="index/css/cursor.css">
+    <link rel="stylesheet" href="index/css/background.css">
+    <link rel="stylesheet" href="index/css/decoration.css">
+    <link rel="stylesheet" href="index/css/index-styles.css">
+    <link rel="stylesheet" href="index/css/page-jump.css">
+    <link rel="stylesheet" href="index/css/menu.css">
+    <link rel="stylesheet" href="index/css/music.css">
+    <link rel="stylesheet" href="index/css/video-overlay.css">
+    <link rel="stylesheet" href="index/css/help.css">
+
+
+    <script src="index/js/page-jump.js" defer></script>
+    <script src="index/js/music.js" defer></script>
+    <script src="index/js/video-overlay.js" defer></script>
+    <script src="index/js/index.js" defer></script>
+    <script src="index/js/go.js" defer></script>
+    <script src="Veins/js/sound-effect.js" defer></script>
+
+</head>
+
+<body>
+    <!-- 加載音頻 -->
+    <audio id="loadSound" src="index/audio/open.mp3" preload="auto"></audio>
+    <audio id="click" src="index/audio/click.mp3" preload="auto"></audio>
+    <audio id="hoverSound" src="index/audio/hover.mp3" preload="auto"></audio>
+
+
+    <div class="transition-elements" id="transitionElements"></div>
+    <!-- 開發者模式切換 -->
+    <input type="checkbox" id="nav" class="nav-checkbox">
+    <input type="checkbox" id="DeveloperMode">
+    <input type="checkbox" id="help">
+    <label for="DeveloperMode" class="DeveloperMode ">
+        <p>Developer Mode ⛏︎</p>
+    </label>
+
+    <!-- 導航菜單容器：原 .nav → .menu-nav -->
+    <div class="menu-nav">
+        <!-- <div class="gradient"></div> -->
+        <div class="menu-texture"></div>
+        <div class="menu-bgcolor"></div>
+        <div class="menu-navigation" id="menu-navigation">
+            <div class="menu-nav-item" data-url="index.html">
+                <a href="#" class="menu-nav-link" data-original="首頁">首頁 </a>
+                <span class="menu-nav-eng" data-original="△Lighthouse">△Lighthouse</span>
+                <img src="index/image/HOME.webp" data-original="首頁示意圖" class="menu-nav-image">
+                <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="menu-nav-graphic">
+                <div class="menu-nav-bg"></div>
+            </div>
+            <div class="menu-nav-item" data-url="veins.html">
+                <a href="#" class="menu-nav-link" data-original="地脈 ">地脈 </a>
+                <span class="menu-nav-eng" data-original="△VEINS">△VEINS</span>
+                <img src="index/image/dimai.webp" data-original="地脈示意圖" class="menu-nav-image">
+                <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="menu-nav-graphic">
+                <div class="menu-nav-bg"></div>
+            </div>
+            <div class="menu-nav-item" data-url="ecological.html">
+                <a href="#" class="menu-nav-link" data-original="生態">生態 </a>
+                <span class="menu-nav-eng" data-original="△Ecological">△Ecological</span>
+                <img src="index/image/nat.webp" data-original="生態示意圖" class="menu-nav-image">
+                <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="menu-nav-graphic">
+                <div class="menu-nav-bg"></div>
+            </div>
+        </div>
+
+        <a href="https://github.com/linplinp/final-project" target="_blank" class="menu-projects-btn" aria-label="查看項目">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M30.4417 5C32.406 5 34.265 5.44776 35.9207 6.24607L32.7172 9.42668C30.8706 11.2601 30.8706 14.2327 32.7172 16.0661C34.5638 17.8995 37.5578 17.8995 39.4044 16.0661L42.2571 13.2337C42.7379 14.5558 43 15.9818 43 17.4685C43 24.3547 37.3775 29.937 30.4417 29.937C28.7825 29.937 27.1985 29.6176 25.7486 29.0373L13.07 41.6253C11.2238 43.4582 8.2307 43.4582 6.38459 41.6253C4.53847 39.7924 4.53847 36.8207 6.38459 34.9877L18.9523 22.5099C18.2651 20.9684 17.8834 19.2627 17.8834 17.4685C17.8834 10.5823 23.5059 5 30.4417 5Z"
+                    fill="#D4AF37" stroke="#FFD700" stroke-width="4" stroke-linejoin="miter" />
+            </svg>
+        </a>
+    </div>
+
+    <!-- 導航按鈕：原 .nav-button → .menu-nav-button（與 CSS 匹配） -->
+    <label for="nav" class="menu-nav-button">
+        <p class="menu-nav-menu">☰</p> <!-- 原 .nav-menu → .menu-nav-menu -->
+        <p class="menu-nav-back">✖</p> <!-- 原 .nav-back → .menu-nav-back -->
+    </label>
+    <div class="topbar-section">
+        <div class="navbar"></div>
+        <svg width="158" height="32" viewBox="0 0 158 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M4.83198 -1.90735e-06C5.19464 -1.90735e-06 5.49331 0.127998 5.72798 0.383999C5.98398 0.639999 6.11198 0.906666 6.11198 1.184C6.11198 1.46133 5.63198 3.456 4.67198 7.168H4.25598L4.92798 2.592H4.83198C4.49064 2.592 4.18131 2.464 3.90398 2.208C3.64798 1.952 3.51998 1.65333 3.51998 1.312C3.51998 0.949333 3.64798 0.639999 3.90398 0.383999C4.15998 0.127998 4.46931 -1.90735e-06 4.83198 -1.90735e-06ZM1.31198 -1.90735e-06C1.67464 -1.90735e-06 1.97331 0.127998 2.20798 0.383999C2.46398 0.639999 2.59198 0.906666 2.59198 1.184C2.59198 1.46133 2.11198 3.456 1.15198 7.168H0.735977L1.40798 2.592H1.31198C0.970643 2.592 0.66131 2.464 0.383977 2.208C0.127977 1.952 -2.3365e-05 1.65333 -2.3365e-05 1.312C-2.3365e-05 0.949333 0.127977 0.639999 0.383977 0.383999C0.639977 0.127998 0.94931 -1.90735e-06 1.31198 -1.90735e-06ZM14.0012 24C12.1239 24 10.9399 23.5093 10.4492 22.528C10.3426 22.3147 10.2892 22.1227 10.2892 21.952V0.0319996H12.5292V21.728C12.5292 22.3467 12.6466 22.8267 12.8812 23.168C13.1372 23.488 13.3932 23.6587 13.6492 23.68L14.0012 23.744H14.9932V24H14.0012ZM20.045 24C19.1703 24 18.4983 23.808 18.029 23.424C17.581 23.04 17.3463 22.656 17.325 22.272L17.293 21.728V8H19.533V21.728C19.533 22.3467 19.6503 22.8267 19.885 23.168C20.141 23.488 20.3863 23.6587 20.621 23.68L21.005 23.744H21.997V24H20.045ZM17.485 4.416C17.229 4.16 17.101 3.84 17.101 3.456C17.101 3.072 17.229 2.752 17.485 2.496C17.741 2.21866 18.061 2.08 18.445 2.08C18.829 2.08 19.149 2.21866 19.405 2.496C19.6823 2.752 19.821 3.072 19.821 3.456C19.821 3.84 19.6823 4.16 19.405 4.416C19.149 4.672 18.829 4.8 18.445 4.8C18.061 4.8 17.741 4.672 17.485 4.416ZM23.7772 16.576C23.7772 13.8027 24.4492 11.6587 25.7932 10.144C27.1372 8.62933 29.1532 7.872 31.8412 7.872C33.8252 7.872 35.8412 8.224 37.8892 8.928V24.384C37.8679 29.4613 35.6492 32 31.2332 32C28.8012 32 26.7212 31.2107 24.9932 29.632L25.2172 29.44C27.0519 30.976 29.0572 31.744 31.2332 31.744C34.1772 31.744 35.6492 29.2907 35.6492 24.384V21.216C35.2439 21.9627 34.5719 22.624 33.6332 23.2C32.6946 23.776 31.5852 24.064 30.3052 24.064C25.9532 23.9573 23.7772 21.4613 23.7772 16.576ZM30.3372 23.808C31.7666 23.808 32.9932 23.424 34.0172 22.656C35.0412 21.888 35.5852 21.1307 35.6492 20.384V9.088C34.1132 8.448 32.8119 8.128 31.7452 8.128C29.8466 8.128 28.4172 8.87467 27.4572 10.368C26.4972 11.84 26.0172 13.9093 26.0172 16.576C26.0172 21.3973 27.4572 23.808 30.3372 23.808ZM55.3147 24C54.4401 24 53.7681 23.808 53.2987 23.424C52.8507 23.04 52.6161 22.656 52.5947 22.272L52.5627 21.728V11.68C52.5627 9.99467 52.1147 8.91733 51.2187 8.448C50.7921 8.23467 50.2481 8.128 49.5867 8.128C48.2641 8.128 47.0694 8.672 46.0027 9.76C44.9574 10.8267 44.4347 11.7867 44.4347 12.64V24H42.1947V0.0319996H44.4347V11.648C44.7761 10.7307 45.4267 9.87733 46.3867 9.088C47.3467 8.27733 48.4241 7.872 49.6187 7.872C51.6881 7.872 53.0641 8.23467 53.7467 8.96C54.4507 9.664 54.8027 10.5813 54.8027 11.712V21.728C54.8027 22.3467 54.9201 22.8267 55.1547 23.168C55.4107 23.488 55.6561 23.6587 55.8907 23.68L56.2747 23.744H57.2667V24H55.3147ZM59.496 8.256V8H60.168V4.8H62.408V8H67.304V8.256H62.408V19.904C62.408 21.2907 62.5573 22.2933 62.856 22.912C63.176 23.5307 63.8266 23.84 64.808 23.84C65.8106 23.84 66.824 23.6373 67.848 23.232L67.944 23.488C66.8773 23.8933 65.6506 24.096 64.264 24.096C62.8986 24.096 61.8746 23.8187 61.192 23.264C60.5093 22.688 60.168 21.5573 60.168 19.872V8.256H59.496ZM82.8147 24C81.9401 24 81.2681 23.808 80.7987 23.424C80.3507 23.04 80.1161 22.656 80.0947 22.272L80.0627 21.728V11.68C80.0627 9.99467 79.6147 8.91733 78.7187 8.448C78.2921 8.23467 77.7481 8.128 77.0867 8.128C75.7641 8.128 74.5694 8.672 73.5027 9.76C72.4574 10.8267 71.9347 11.7867 71.9347 12.64V24H69.6947V0.0319996H71.9347V11.648C72.2761 10.7307 72.9267 9.87733 73.8867 9.088C74.8467 8.27733 75.9241 7.872 77.1187 7.872C79.1881 7.872 80.5641 8.23467 81.2467 8.96C81.9507 9.664 82.3027 10.5813 82.3027 11.712V21.728C82.3027 22.3467 82.4201 22.8267 82.6547 23.168C82.9107 23.488 83.1561 23.6587 83.3907 23.68L83.7747 23.744H84.7667V24H82.8147ZM93.7712 24.128C91.5312 24.128 89.7072 23.488 88.2992 22.208C86.8912 20.928 86.1872 18.9547 86.1872 16.288C86.1872 13.6213 86.9126 11.552 88.3632 10.08C89.8352 8.608 91.6912 7.872 93.9312 7.872C96.1926 7.872 98.0272 8.512 99.4352 9.792C100.843 11.072 101.547 13.0453 101.547 15.712C101.547 18.3787 100.811 20.448 99.3392 21.92C97.8886 23.392 96.0326 24.128 93.7712 24.128ZM93.9952 8.128C92.3739 8.128 91.0299 8.85333 89.9632 10.304C88.8966 11.7333 88.3632 13.7387 88.3632 16.32C88.3632 18.88 88.8539 20.7787 89.8352 22.016C90.8166 23.2533 92.1179 23.872 93.7392 23.872C95.3606 23.872 96.7046 23.1573 97.7712 21.728C98.8379 20.2773 99.3712 18.272 99.3712 15.712C99.3712 13.1307 98.8806 11.2213 97.8992 9.984C96.9179 8.74667 95.6166 8.128 93.9952 8.128ZM106.333 20.32C106.333 22.0053 106.781 23.0827 107.677 23.552C108.104 23.7653 108.648 23.872 109.309 23.872C110.653 23.872 111.848 23.36 112.893 22.336C113.96 21.312 114.536 20.3627 114.621 19.488V8H116.861V21.728C116.861 22.3467 116.979 22.8267 117.213 23.168C117.469 23.488 117.725 23.6587 117.981 23.68L118.333 23.744H119.325V24H117.373C116.499 24 115.827 23.808 115.357 23.424C114.909 23.04 114.675 22.656 114.653 22.272L114.621 21.728V20.352C114.237 21.2693 113.555 22.1333 112.573 22.944C111.592 23.7333 110.515 24.128 109.341 24.128C108.189 24.128 107.24 24.0213 106.493 23.808C105.768 23.5733 105.245 23.2533 104.925 22.848C104.371 22.1867 104.093 21.3333 104.093 20.288V8H106.333V20.32ZM130.281 9.12C129.94 8.84267 129.385 8.608 128.617 8.416C127.871 8.224 127.305 8.128 126.921 8.128C126.537 8.128 126.313 8.128 126.249 8.128C125.097 8.14933 124.265 8.448 123.753 9.024C123.241 9.57867 122.985 10.208 122.985 10.912C122.985 11.616 123.209 12.2133 123.657 12.704C124.105 13.1733 124.66 13.5467 125.321 13.824C126.004 14.08 126.729 14.3787 127.497 14.72C128.287 15.0613 129.012 15.4133 129.673 15.776C130.356 16.1173 130.921 16.6293 131.369 17.312C131.817 17.9733 132.041 18.8053 132.041 19.808C132.041 20.8107 131.689 21.664 130.985 22.368C130.281 23.072 129.492 23.5413 128.617 23.776C127.764 24.0107 126.836 24.128 125.833 24.128C123.657 24.128 122.025 23.648 120.937 22.688L121.129 22.496C121.556 22.9013 122.185 23.232 123.017 23.488C123.871 23.744 124.692 23.872 125.481 23.872C126.74 23.872 127.775 23.5307 128.585 22.848C129.417 22.144 129.833 21.28 129.833 20.256C129.833 19.2107 129.524 18.3787 128.905 17.76C128.287 17.12 127.529 16.6293 126.633 16.288C125.759 15.9253 124.873 15.5733 123.977 15.232C123.081 14.8693 122.324 14.3787 121.705 13.76C121.087 13.12 120.777 12.384 120.777 11.552C120.777 10.72 120.969 10.048 121.353 9.536C121.737 9.00267 122.249 8.62933 122.889 8.416C123.977 8.05333 125.065 7.872 126.153 7.872C127.988 7.872 129.417 8.21333 130.441 8.896L130.281 9.12ZM136.613 16.192C136.613 18.8373 137.072 20.7787 137.989 22.016C138.928 23.2533 140.155 23.872 141.669 23.872C143.803 23.872 145.701 23.552 147.365 22.912L147.461 23.136C145.755 23.7973 143.824 24.128 141.669 24.128C139.536 24.128 137.797 23.488 136.453 22.208C135.109 20.928 134.437 18.9547 134.437 16.288C134.437 13.6213 135.141 11.552 136.549 10.08C137.957 8.608 139.749 7.872 141.925 7.872C143.675 7.872 145.147 8.39467 146.341 9.44C147.536 10.4853 148.133 12.032 148.133 14.08C148.133 14.1867 148.133 14.2933 148.133 14.4H136.709C136.645 14.976 136.613 15.5733 136.613 16.192ZM145.957 14.144C145.936 12.096 145.541 10.5813 144.773 9.6C144.005 8.61867 143.013 8.128 141.797 8.128C140.581 8.128 139.493 8.66133 138.533 9.728C137.595 10.7947 136.997 12.2667 136.741 14.144H145.957ZM156.582 -1.90735e-06C156.945 -1.90735e-06 157.243 0.127998 157.478 0.383999C157.734 0.639999 157.862 0.906666 157.862 1.184C157.862 1.46133 157.382 3.456 156.422 7.168H156.006L156.678 2.592H156.582C156.241 2.592 155.931 2.464 155.654 2.208C155.398 1.952 155.27 1.65333 155.27 1.312C155.27 0.949333 155.398 0.639999 155.654 0.383999C155.91 0.127998 156.219 -1.90735e-06 156.582 -1.90735e-06ZM153.062 -1.90735e-06C153.425 -1.90735e-06 153.723 0.127998 153.958 0.383999C154.214 0.639999 154.342 0.906666 154.342 1.184C154.342 1.46133 153.862 3.456 152.902 7.168H152.486L153.158 2.592H153.062C152.721 2.592 152.411 2.464 152.134 2.208C151.878 1.952 151.75 1.65333 151.75 1.312C151.75 0.949333 151.878 0.639999 152.134 0.383999C152.39 0.127998 152.699 -1.90735e-06 153.062 -1.90735e-06Z"
+                fill="#C7B32D" />
+        </svg>
+    </div>
+
+    <!-- 音樂 icon -->
+    <div class="music-icon" id="musicIcon">
+        <img src="index/icon/光盘_record-disc.svg">
+    </div>
+
+    <!-- 背景音樂 -->
+    <audio id="bgMusic" src="index/audio/TheM_extended Version.mp3" loop autoplay volume="0"></audio>
+
+    <div class="page-vignette "></div>
+    <div class="side-bar left "></div>
+    <div class="side-bar right "></div>
+
+
+
+    <div class="distance-container ">
+        <div class="distance-line"></div>
+        <div class="distance-marker m1"></div>
+        <div class="distance-marker m2"></div>
+        <div class="distance-marker m3"></div>
+        <div class="distance-value v1">50km</div>
+        <div class="distance-value v2">100km</div>
+        <div class="distance-value v3">150km</div>
+    </div>
+    <div class="tech-ring-container ">
+        <div class="tech-ring outer"></div>
+        <div class="tech-ring middle"></div>
+        <div class="tech-ring inner"></div>
+        <div class="tech-ring"></div>
+        <div class="tech-ring inner"></div>
+        <div class="tech-ring inner-small"></div>
+        <div class="ring-decoration"></div>
+        <div class="ring-scanner"></div>
+        <div class="data-point"></div>
+        <div class="data-point"></div>
+        <div class="data-point"></div>
+        <div class="data-point"></div>
+        <div class="data-point"></div>
+        <div class="data-point"></div>
+        <div class="data-point"></div>
+        <div class="data-point"></div>
+    </div>
+    <div class="data-art-section " id="dataArtSection">
+        <div class="data-art-line l1"></div>
+        <div class="data-art-line l2"></div>
+        <div class="data-art-line l3"></div>
+        <div class="data-art-line l4"></div>
+        <div class="data-block b1">
+            STAT-A: 0.85
+            SECTOR: X-7
+        </div>
+        <div class="data-block b2">
+            ENV-TEMP: 28.5C
+            GRAV-DEV: 0.003
+        </div>
+        <div class="data-block b3">
+            LOG-ID: 74B2
+            <br>INIT: COMPLETE
+        </div>
+    </div>
+
+    <div class="scroll-container">
+        <div class="container">
+            <div class="background-container">
+                <img src="index/image/bg.webp" alt="星空背景" class="stars-video">
+            </div>
+            <div class="sky-container"></div>
+
+            <div class="ruins-container"></div>
+            <div class="desert-container"></div>
+
+            <div class="ruins-container"></div>
+            <div class="desert-container"></div>
+
+            <div class="window-frame">
+                <img src="index/image/窗框.webp" alt="窗框">
+            </div>
+
+            <div class="navigation" id="navigation">
+                <div class="nav-item" data-url="index.html">
+                    <a href="#" class="nav-link" data-original="首頁">首頁 </a>
+                    <span class="nav-eng" data-original="△Lighthouse">△Lighthouse</span>
+                    <img src="index/image/HOME.webp" data-original="首頁示意圖" class="nav-image">
+                    <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="nav-graphic">
+                    <div class="nav-bg"></div>
+                </div>
+                <div class="nav-item" data-url="veins.html">
+                    <a href="#" class="nav-link" data-original="地脈 ">地脈 </a>
+                    <span class="nav-eng" data-original="△VEINS">△VEINS</span>
+                    <img src="index/image/dimai.webp" data-original="地脈示意圖" class="nav-image">
+                    <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="nav-graphic">
+                    <div class="nav-bg"></div>
+                </div>
+                <div class="nav-item" data-url="ecological.html">
+                    <a href="#" class="nav-link" data-original="生態">生態 </a>
+                    <span class="nav-eng" data-original="△Ecological">△Ecological</span>
+                    <img src="index/image/nat.webp" data-original="生態示意圖" class="nav-image">
+                    <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="nav-graphic">
+                    <div class="nav-bg"></div>
+                </div>
+            </div>
+
+            <div class="desktop">
+                <img src="index/image/table.webp" class="desktop-image" id="desktop">
+
+                <div class="desktop-items">
+                    <div class="desktop-item ashtray-book">
+                        <a onclick="delayedRedirect(this.href,'_blank', 4)"
+                            href="https://docs.google.com/document/d/1CBY4F9p6ERMXe-TY5Kkbd95qvWgEWn-G/edit?pli=1#heading=h.rzctobdls0eu" target="_blank"
+                            rel="noopener noreferrer"><img src="index/image/obj-l.webp"></a>
+                        <div class="ashtray-smoke">
+                            <div class="ashtray-smoke-particle"></div>
+                            <div class="ashtray-smoke-particle"></div>
+                            <div class="ashtray-smoke-particle"></div>
+                            <div class="ashtray-smoke-particle"></div>
+                        </div>
+                    </div>
+                    <div class="tablet desktop-item">
+                        <a onclick="delayedRedirect(this.href,'_blank', 5)"
+                            href="https://docs.google.com/document/d/1CBY4F9p6ERMXe-TY5Kkbd95qvWgEWn-G/edit?pli=1#heading=h.rzctobdls0eu"
+                            target="_blank" rel="noopener noreferrer"><img src="index/image/obj-c.webp"></a>
+                    </div>
+
+                    <div class="coffee-cup desktop-item">
+                        <a>
+                            <img src="index/image/obj-r.webp">
+                            <div class="steam">
+                                <div class="steam-particle"></div>
+                                <div class="steam-particle"></div>
+                                <div class="steam-particle"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--桌面交互動畫-->
+    <div id="videoOverlay" class="video-overlay">
+        <video id="overlayVideo" playsinline>
+            <source src="index/video/CF-2.webm" type="video/webm">
+        </video>
+    </div>
+
+
+    <label for="help" class="help">
+        <div class="problem-section " id="problemSection">
+            <div class="problem-image-container">
+                <img src="index/image/howdo-0.webp" alt="遇到問題? 該怎麼操作它" class="howdo-image main">
+                <img src="index/image/howdo1.webp" alt="遇到問題? 該怎麼操作它" class="howdo-image sub">
+                <a>
+                    <img src="index/image/howdo2.webp" alt="輔助圖片" class="howdo-image sub2">
+                </a>
+            </div>
+        </div>
+        <div class="help-button">✖</div>
+    </label>
+
+    <section class="help-container">
+
+        <div class="help-black"></div>
+        <div class="sliderwrapper">
+            <p class="help-title">OPERATIONS MANUAL</p>
+            <div class="slider">
+                <div class="imgframe"><img id="slider1" src="index/image/Webpage Operation Instructions/web-1.webp">
+                </div>
+                <div class="imgframe"><img id="slider2" src="index/image/Webpage Operation Instructions/web-2.webp">
+                </div>
+                <div class="imgframe"><img id="slider3" src="index/image/Webpage Operation Instructions/web-3.webp">
+                </div>
+                <div class="imgframe"><img id="slider3" src="index/image/Webpage Operation Instructions/web-4.webp">
+                </div>
+                <div class="imgframe"><img id="slider3" src="index/image/Webpage Operation Instructions/web-5.webp">
+                </div>
+                <div class="imgframe"><img id="slider3" src="index/image/Webpage Operation Instructions/web-6.webp">
+                </div>
+                <div class="imgframe"><img id="slider3" src="index/image/Webpage Operation Instructions/web-7.webp">
+                </div>
+                <div class="imgframe"><img id="slider3" src="index/image/Webpage Operation Instructions/web-8.webp">
+                </div>
+                <div class="imgframe"><img id="slider3" src="index/image/Webpage Operation Instructions/web-9.webp">
+                </div>
+                <div class="imgframe"><img id="slider3" src="index/image/Webpage Operation Instructions/web-10.webp">
+                </div>
+                <div class="imgframe"><img id="slider3" src="index/image/Webpage Operation Instructions/web-11.webp">
+                </div>
+                <div class="imgframe"><img id="slider3" src="index/image/Webpage Operation Instructions/web-12.webp">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

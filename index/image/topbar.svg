@@ -1,0 +1,38 @@
+<svg width="1920" height="161" viewBox="0 0 1920 161" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 1. 模糊背景层：实现玻璃拟物效果 -->
+            <foreignObject x="-11.6" y="-11.6" width="1943.2" height="172.141">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="
+                    backdrop-filter: blur(5.55px); /* 模糊背景 */
+                    clip-path: url(#bgblur_0_10_20_clip_path); /* 按梯形裁剪模糊区域 */
+                    height: 100%;
+                    width: 100%;
+                "></div>
+            </foreignObject>
+            
+            <!-- 2. 梯形黑色区域：带阴影和描边 -->
+            <g opacity="0.58" filter="url(#filter0_d_10_20)" data-figma-bg-blur-radius="11.1">
+                <!-- 黑色填充梯形 -->
+                <path d="M-3.05176e-05 0H1920V146L960 70L-3.05176e-05 146V0Z" fill="black" />
+                <!-- 白色描边（梯形边框） -->
+                <path d="M-3.05176e-05 0H1920V146L960 70L-3.05176e-05 146V0Z" stroke="white" />
+            </g>
+            
+            <!-- 3. 定义滤镜和裁剪路径（SVG 内部依赖） -->
+            <defs>
+                <!-- 阴影滤镜：向下偏移 10px，模糊 2px，透明度 0.25 -->
+                <filter id="filter0_d_10_20" x="-11.6" y="-11.6" width="1943.2" height="172.141" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                    <feOffset dy="10" />
+                    <feGaussianBlur stdDeviation="2" />
+                    <feComposite in2="hardAlpha" operator="out" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_10_20" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_10_20" result="shape" />
+                </filter>
+                <!-- 裁剪路径：让模糊区域只显示梯形范围 -->
+                <clipPath id="bgblur_0_10_20_clip_path" transform="translate(11.6 11.6)">
+                    <path d="M-3.05176e-05 0H1920V146L960 70L-3.05176e-05 146V0Z" />
+                </clipPath>
+            </defs>
+</svg>

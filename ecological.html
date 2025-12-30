@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="index/icon/多三角_multi-triangular-two.svg" type="index/image/png">
+    <title>深淵探勘</title>
+    <link rel="stylesheet" href="abyss/styles.css">
+    <link rel="stylesheet" href="abyss/menu.css">
+    <link rel="stylesheet" href="index/css/cursor.css">
+    <link rel="stylesheet" href="abyss/music.css">
+    <link rel="stylesheet" href="abyss/loading.css">
+    <link rel="stylesheet" href="abyss/decoration.css">
+
+
+    <script src="abyss/sinSpeedChange.js" defer></script>
+    <script src="abyss/music.js" defer></script>
+    <script src="abyss/page-jump.js" defer></script>
+    <script src="Veins/js/sound-effect.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- 加載音頻 -->
+    <audio id="loadSound" src="index/audio/elevator.mp3" preload="auto"></audio>
+    <audio id="click" src="index/audio/click.mp3" preload="auto"></audio>
+    <audio id="hoverSound" src="index/audio/hover.mp3"></audio>
+
+
+    <input type="checkbox" id="nav" class="nav-checkbox">
+    <div class="menu-nav">
+        <div class="menu-texture"></div>
+        <div class="menu-bgcolor"></div>
+        <div class="menu-navigation" id="menu-navigation">
+            <div class="menu-nav-item" data-url="index.html">
+                <a href="#" class="menu-nav-link" data-original="首頁">首頁 </a>
+                <span class="menu-nav-eng" data-original="△Lighthouse">△Lighthouse</span>
+                <img src="index/image/HOME.webp" data-original="首頁示意圖" class="menu-nav-image">
+                <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="menu-nav-graphic">
+                <div class="menu-nav-bg"></div>
+            </div>
+            <div class="menu-nav-item" data-url="veins.html">
+                <a href="#" class="menu-nav-link" data-original="地脈 ">地脈 </a>
+                <span class="menu-nav-eng" data-original="△VEINS">△VEINS</span>
+                <img src="index/image/dimai.webp" data-original="地脈示意圖" class="menu-nav-image">
+                <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="menu-nav-graphic">
+                <div class="menu-nav-bg"></div>
+            </div>
+            <div class="menu-nav-item" data-url="ecological.html">
+                <a href="#" class="menu-nav-link" data-original="生態">生態 </a>
+                <span class="menu-nav-eng" data-original="△Ecological">△Ecological</span>
+                <img src="index/image/nat.webp" data-original="生態示意圖" class="menu-nav-image">
+                <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="menu-nav-graphic">
+                <div class="menu-nav-bg"></div>
+            </div>
+        </div>
+        <a href="https://github.com/linplinp/final-project" target="_blank" class="menu-projects-btn" aria-label="查看項目">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M30.4417 5C32.406 5 34.265 5.44776 35.9207 6.24607L32.7172 9.42668C30.8706 11.2601 30.8706 14.2327 32.7172 16.0661C34.5638 17.8995 37.5578 17.8995 39.4044 16.0661L42.2571 13.2337C42.7379 14.5558 43 15.9818 43 17.4685C43 24.3547 37.3775 29.937 30.4417 29.937C28.7825 29.937 27.1985 29.6176 25.7486 29.0373L13.07 41.6253C11.2238 43.4582 8.2307 43.4582 6.38459 41.6253C4.53847 39.7924 4.53847 36.8207 6.38459 34.9877L18.9523 22.5099C18.2651 20.9684 17.8834 19.2627 17.8834 17.4685C17.8834 10.5823 23.5059 5 30.4417 5Z"
+                    fill="#D4AF37" stroke="#FFD700" stroke-width="4" stroke-linejoin="miter" />
+            </svg>
+        </a>
+    </div>
+
+    <!-- 導航按鈕：原 .nav-button → .menu-nav-button（與 CSS 匹配） -->
+    <label for="nav" class="menu-nav-button">
+        <p class="menu-nav-menu">☰</p> <!-- 原 .nav-menu → .menu-nav-menu -->
+        <p class="menu-nav-back">✖</p> <!-- 原 .nav-back → .menu-nav-back -->
+    </label>
+
+    <!-- 音樂 icon -->
+    <div class="music-icon" id="musicIcon">
+        <img src="index/icon/光盘_record-disc.svg">
+    </div>
+
+    <!-- 背景音樂 -->
+    <audio id="bgMusic" src="index/audio/SpaceWave (Ambient Synth Music).mp3" loop autoplay volume="0"></audio>
+
+    <div class="crt-overlay">
+        <div class="scanlines"></div>
+    </div>
+
+    <div class="container">
+
+        <div class="progress-track">
+            <div class="progressbar"></div>
+            <div class="progress-ticks"></div>
+        </div>
+
+        <img src="abyss/pic/uiframe.webp" class="ui-frame"></img>
+
+        <div class="sphere">
+            <img src="abyss/pic/sphere.gif"></img>
+        </div>
+
+        <input type="checkbox" id="nav-button">
+        <label for="nav-button">
+            <p>❖</p>
+        </label>
+
+        <div class="code-log-container">
+            <div class="code-scroll-wrapper">
+                <div class="code-block">
+                    > NETHER_DIVER_OS v4.0.2 BOOT_SEQ...
+                    > KERNEL_INTEGRITY: [OK] 0x7FF4A2
+                    > MOUNTING_FS: /dev/geo_sensor ... success
+                    > CALIBRATING_DEPTH_GAUGE...
+                    > LINKING_TO_SATELLITE... [FAIL]
+                    > SWITCHING_TO_INTERNAL_GUIDANCE... [OK]
+                    ----------------------------------------
+                    [SYS] MEM_ALLOC: 0x000000 -> 0x00A4FF
+                    [SYS] VRAM_CHECK: NVIDIA_RTX DETECTED
+                    [GEO] SEISMIC_ACTIVITY: LOW
+                    [GEO] TEMP_GRADIENT: NORMAL (+30C/km)
+                    ----------------------------------------
+                    Running PID: 4022 (drill_control.exe)
+                    Running PID: 4023 (coolant_pump.sys)
+                    > STREAMING DATA...
+                    0F 2A 4C 99 | A0 B1 C2 D3 | STRUCT_OK
+                    11 00 FF AA | 00 00 00 00 | NULL_PTR
+                    CA FE BA BE | DE AD BE EF | MAGIC_NUM
+                    > WARNING: PRESSURE INCREASING
+                    > DEPTH: 150m ... 200m ...
+                    > SCANNING_LAYERS...
+                    [██████░░░░] 60% COMPLETED
+                    > FOUND_MINERAL: QUARTZ
+                    > FOUND_MINERAL: BASALT
+                    > IGNORING_ERRORS...
+                    ----------------------------------------
+                    > SYSTEM_READY.
+                    > WAITING_FOR_USER_INPUT...
+                </div>
+                <div class="code-block">
+                    > NETHER_OS v4.0.5 BOOT
+                    > CHECKING_BIOS... [OK]
+                    > MOUNT_FS: /DEV/GEO_01
+                    > MEM_ALLOC: 128TB [OK]
+                    > CALIBRATING_SENSORS...
+                    > INIT_GYROSCOPE... [OK]
+                    > LINK_UPLINK... [FAIL]
+                    > ERR: 404_NO_CARRIER
+                    > SW_OFFLINE_MODE...
+                    > DRILL_RPM: 3200
+                    > COOLANT_LVL: 98%
+                    > LITHOSPHERE: PENETRATED
+                    > SCANNING_LAYERS...
+                    > P_WAVE: DETECTED
+                    > S_WAVE: ANALYZING
+                    > TEMP_GRADIENT: RISING
+                    > WARN: 1200°C DETECTED
+                    > PRESSURE: CRITICAL
+                    > CORE_MAGNETISM: MAX
+                    > PROTOCOL_OVERRIDE...
+                    > DUMPING_CACHE...
+                    > RESTARTING_MODULE...
+                    > SYSTEM_UNSTABLE
+                    > RETRY_INIT...
+                </div>
+            </div>
+        </div>
+
+        <div class="depth-gauge">
+            <div class="arrow-wrapper">
+                <div class="gauge-arrow">▶</div>
+            </div>
+            <div class="gauge-counter"></div>
+        </div>
+
+        <svg class="svg-border" width="100%" height="100%" viewBox="-5 -10 310 210" preserveAspectRatio="none">
+            <defs>
+                <path id="sine-wave"
+                    d="M0 10 Q 5 0 10 10 T 20 10 T 30 10 T 40 10 T 50 10 T 60 10 T 70 10 T 80 10 T 90 10 T 100 10 T 110 10 T 120 10 T 130 10 T 140 10 T 150 10 T 160 10" />
+            </defs>
+            <svg class="fade-mask" x="25" y="170" width="92" height="20" viewBox="0 0 90 20" style="overflow:hidden;">
+                <use href="#sine-wave" class="wave-anim-left" stroke="#fff193" stroke-width="1" fill="none"
+                    opacity="0.9" />
+            </svg>
+
+            <svg class="fade-mask" x="183" y="170" width="92" height="20" viewBox="0 0 90 20" style="overflow: hidden;">
+                <use href="#sine-wave" class="wave-anim-right" stroke="#fff193" stroke-width="1" fill="none"
+                    opacity="0.9" />
+            </svg>
+        </svg>
+
+        <div class="depth-counter">
+            <div class="depth-strip">
+                <div class="depth-num"> 0</div>
+                <div class="depth-num">-1</div>
+                <div class="depth-num">-2</div>
+                <div class="depth-num">-3</div>
+                <div class="depth-num">-4</div>
+                <div class="depth-num">-5</div>
+                <div class="depth-num"> X</div>
+            </div>
+        </div>
+
+        <div class="speedline-container">
+            <div class="speedline-strip">
+                <div class="speedline">
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p> </p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                    <p>||| |||</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="elevator-track">
+            <div class="elevator-wrapper">
+                <div class="scrollshow">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200" preserveAspectRatio="none">
+                        <g class="small-gear">
+                            <defs>
+                                <g id="one-tooth">
+                                    <path d="M44 20 L46 10 L54 10 L56 20" class="gear" />
+                                </g>
+                            </defs>
+
+                            <g class="gear-spin">
+
+                                <circle cx="50" cy="50" r="30" class="gear" />
+
+                                <circle cx="50" cy="50" r="12" class="gear" />
+
+                                <use href="#one-tooth" transform="rotate(0, 50, 50)" />
+                                <use href="#one-tooth" transform="rotate(45, 50, 50)" />
+                                <use href="#one-tooth" transform="rotate(90, 50, 50)" />
+                                <use href="#one-tooth" transform="rotate(135, 50, 50)" />
+                                <use href="#one-tooth" transform="rotate(180, 50, 50)" />
+                                <use href="#one-tooth" transform="rotate(225, 50, 50)" />
+                                <use href="#one-tooth" transform="rotate(270, 50, 50)" />
+                                <use href="#one-tooth" transform="rotate(315, 50, 50)" />
+
+                            </g>
+                        </g>
+
+                        <g class="large-gear">
+                            <defs>
+                                <g id="std-tooth">
+                                    <path d="M44 20 L46 10 L54 10 L56 20" class="gear" />
+                                </g>
+                            </defs>
+
+                            <g class="gear-spin-large">
+
+                                <circle cx="50" cy="50" r="45" class="gear" />
+
+                                <circle cx="50" cy="50" r="15" class="gear" />
+
+                                <use href="#std-tooth" transform="rotate(0, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(30, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(60, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(90, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(120, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(150, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(180, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(210, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(240, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(270, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(300, 50, 50) translate(0, -15)" />
+                                <use href="#std-tooth" transform="rotate(330, 50, 50) translate(0, -15)" />
+
+                            </g>
+                        </g>
+
+                        <g class="elevator">
+                            <polygon class="elevator-frame" points="20,-5 20,-10 30,-20 68,-20 78,-10 78,-5"></polygon>
+                            <rect class="elevator-frame" x="3" y="0" width="94" height="5"></rect>
+
+                            <rect class="elevator2" x="5" y="10" width="40" height="115"></rect>
+                            <rect class="elevator1" x="5" y="10" width="40" height="115"></rect>
+
+                            <rect class="elevator1" x="55" y="10" width="40" height="115"></rect>
+                            <rect class="elevator2" x="55" y="10" width="40" height="115"></rect>
+
+                            <polygon class="elevator-frame" points="3,130 3,133 10,135 90,135 97,133 97,130"></polygon>
+
+                            <defs>
+                                <pattern id="line-left" width="8" height="10" patternUnits="userSpaceOnUse"
+                                    patternTransform="rotate(15)">
+                                    <line class="elevatorline" x1="0" y1="0" x2="0" y2="10" />
+                                </pattern>
+
+                                <pattern id="line-right" width="8" height="10" patternUnits="userSpaceOnUse"
+                                    patternTransform="rotate(-15)">
+                                    <line class="elevatorline" x1="0" y1="0" x2="0" y2="10" />
+                                </pattern>
+
+                            </defs>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="0" class="ground">
+            <h1>NetherDiver OS.v4</h1>
+        </div>
+        <div class="crust">
+            <h1 class="title">地殼</h1>
+            <p class="info">
+                瑩脈水族岩窟位於深層斷層，巨大乙
+                太晶簇垂於暗河，散發幽藍冷光。此
+                處完全隔絕陽光，生命依賴地脈能量
+                與靈能薄霧循環，形成獨特且靜謐的
+                晶化生態體系。
+            </p>
+            <p class="info2">
+                濕度： 95% (極高水霧)
+                稀有物： 晶簇母體、沉銀鱗片
+                地脈： 極強 (能量共振)
+                生物： 巨型傘蕈、銀梭魚群
+                海拔： 深度 -5,000m ~ -70,000m
+                毒性： 中度 (神經性孢子)
+                危害： B級 (地形濕滑、能量爆裂)
+            </p>
+        </div>
+        <div class="upper">
+            <h1 class="title">上地函</h1>
+            <p class="info">
+                翡翠熔岩拱廊是連接上層地殼與深層
+                地幔的關鍵過渡帶。巨大且耐熱的橄
+                欖石如宏偉拱門支撐著洞穴，下方則
+                是脈動的岩漿河床。這裡的高溫蒸氣
+                催生特殊的礦化生態系統，發光菌類
+                與類似珊瑚的礦物結構在岩漿岸邊交
+                織生長。此地融合了晶體的穩定能量
+                與地幔的狂暴熱力，形成一個半晶化
+                半熔融的奇詭空間。
+            </p>
+            <p class="info2">
+                濕度： 20% - 35% (充滿硫磺蒸汽)
+                稀有物： 翠火晶石、耐熱真菌孢子
+                地脈： 不穩定 (熱能與晶體能量交織，呈綠橘閃爍)
+                生物： 熔岩珊瑚、灰燼發光蕈
+                海拔： 深度 -36,000m ~ -660,000m
+                毒性： 高 (含有高濃度二氧化硫與礦物粉塵)
+                危害： A 級 (高熱燙傷、地面結構不穩)
+            </p>
+        </div>
+        <div class="mantle">
+            <h1 class="title">下地函</h1>
+            <p class="info">
+                熾熱地函熔淵位於極深斷裂帶，由奔
+                騰岩漿河與巨型金屬結晶柱構成。受
+                行星核熱對流驅動，空氣佈滿灼熱蒸
+                汽與火山碎屑。地脈能量在此化作暴
+                戾熱能噴發，交織成黑曜石與熔岩的
+                極端地景，是物質幾近熔融的原始的
+                深淵。
+            </p>
+            <p class="info2">
+                濕度： 5% - 12% (極低，多為過熱蒸汽)
+                稀有物： 原始熔火精核、耐火金屬礦脈
+                地脈： 狂暴 (高熱能共振，呈橘紅光)
+                生物： 熔岩嗜極菌、火靈節肢生物
+                海拔： 深度 -660,000m ~ -2,890,000m
+                毒性： 極高 (硫磺、二氧化碳與重金屬粉塵)
+                危害： S 級 (極度危險；高溫熱輻射、岩漿噴發)
+            </p>
+        </div>
+        <div class="outer">
+            <h1 class="title">外核</h1>
+            <p class="info">
+                雷霆熔火海位於行星核幔邊界的極端
+                高能區。此處由巨大的熔岩支柱支撐
+                著不斷崩塌的岩層，下方是呈金色沸
+                騰狀態的超臨界熔質海洋。由於劇烈
+                的熱對流引發離子摩擦，空間中終年
+                密布著血紅色的電漿雷擊。這裡的物
+                質幾近氣化，能量流動呈現具體的風
+                暴形態，將任何進入的非耐熱物質瞬
+                間分解，是地底世界中能量最狂暴、
+                生命最難以企及的終極禁區。
+            </p>
+            <p class="info2">
+                濕度： 0% - 2% (絕對乾燥，僅存電漿)
+                稀有物： 核心雷磁精粹、不朽黃金熔質
+                地脈： 超限 (能量趨近飽和，引發空間扭曲)
+                生物： 無 (僅觀測到純能量形態的「電漿利維坦」)
+                海拔： 深度 -2,890,000m ~ -5,150,000m
+                毒性： 致命 (強輻射、高濃度重金屬蒸汽)
+                危害： SSS 級 (神話級災難環境)
+            </p>
+        </div>
+        <div class="core">
+            <h1 class="title">內核</h1>
+            <p class="info">
+                始源地核之心是星球生命的源頭，表
+                現為一顆被禁錮在極高壓熔融海中心
+                的微型恆星。這裡不存在常規物質，
+                僅有超高壓下的純粹電漿與固態的光
+                晶。巨大的引力與輻射在此交織，形
+                成了如同「星體之雪」般的重元素結
+                晶，懸浮於耀眼的核心表面。這是萬
+                物地脈的絕對起點，也是物理規律的
+                終點。
+            </p>
+            <p class="info2">
+                濕度： 0% (超臨界狀態，無水分存在)
+                稀有物： 核心奇點碎片、神金「奧利哈鋼」
+                地脈： 源頭節點 (能量無限大，時間流速異常)
+                生物： 無 (理論上僅存在無意識的能量生命體)
+                海拔： 深度 -5,150,000m ~ -6,360,000m (星球重力中心)
+                毒性： 致命 (極高頻伽瑪射線與粒子輻射)
+                危害： X 級 (絕對毀滅；物質進入即刻原子化)
+            </p>
+        </div>
+
+        <div class="footer">
+
+            <div class="warning-tape top-tape">
+                <div class="tape-content">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="tape-content">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <h1>警告:負荷過載</h1>
+            <a href="#0">
+                <h2>立即返回地表</h2>
+            </a>
+
+            <div class="warning-tape bottom-tape">
+                <div class="tape-content">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="tape-content">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+        <div>
+            <div class="loading-bg"></div>
+            <div class="tech-ring-container ">
+                <div class="tech-ring outer"></div>
+                <div class="tech-ring middle"></div>
+                <div class="tech-ring inner"></div>
+                <div class="tech-ring"></div>
+                <div class="tech-ring inner"></div>
+                <div class="tech-ring inner-small"></div>
+                <div class="ring-decoration"></div>
+                <div class="ring-scanner"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+            </div>
+        </div>
+        <img rel="preload" src="Veins/pic/crt.webp" alt="" class="loading-img">
+        <div class="loading-bar"></div>
+        <div class="loading-text">100% SUCCEED</div>
+        <img src="Veins/pic/bluescreen crt.gif" alt="" class="crt-img">
+    </div>
+    <div class="loading-bg"></div>
+</body>
+
+</html>

@@ -1,0 +1,355 @@
+/* 高科技大圓環裝飾樣式 */
+.tech-ring-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 90vw;
+    z-index: 9999;
+    pointer-events: none;
+    animation: rotateRing 60s linear infinite, breatheRing 20s ease-in-out infinite,
+                disappear .2s forwards 3.5s;
+}
+
+.tech-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1.5pt solid rgba(0, 0, 0, 0.151);
+    background: radial-gradient(circle, transparent 50%,
+            rgba(255, 215, 0, 0.03) 100%);
+}
+
+.tech-ring.inner {
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+    border-style: dashed;
+    border-width: 2pt;
+}
+
+.tech-ring.inner-small {
+    width: 40%;
+    height: 40%;
+    top: 30%;
+    left: 30%;
+    border-style: dotted;
+    border-width: 1pt;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.ring-decoration {
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    border-radius: 50%;
+    width: 10vw;
+    height: 10vw;
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: transparent;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    pointer-events: none;
+    animation: ring-decoration 7.5s infinite ease-in-out;
+}
+
+/* 數據點裝飾樣式 */
+.data-point {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: rgb(255, 215, 0);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+    animation: pulse 3s infinite ease-in-out;
+}
+
+.data-point:nth-child(9) {
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0s;
+}
+
+.data-point:nth-child(10) {
+    top: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0.5s;
+}
+
+.data-point:nth-child(11) {
+    top: 50%;
+    left: 15%;
+    transform: translateY(-50%);
+    animation-delay: 1s;
+}
+
+.data-point:nth-child(12) {
+    top: 50%;
+    left: 85%;
+    transform: translateY(-50%);
+    animation-delay: 1.5s;
+}
+
+.data-point:nth-child(13) {
+    top: 25%;
+    left: 25%;
+    animation-delay: 2s;
+}
+
+.data-point:nth-child(14) {
+    top: 25%;
+    left: 75%;
+    animation-delay: 2.5s;
+}
+
+.data-point:nth-child(15) {
+    top: 75%;
+    left: 25%;
+    animation-delay: 3s;
+}
+
+.data-point:nth-child(16) {
+    top: 75%;
+    left: 75%;
+    animation-delay: 3.5s;
+}
+
+
+/* 動畫關鍵幀定義 */
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: skewX(10deg) scale(1.2) rotate(0deg);
+    }
+
+    to {
+        transform: skewX(10deg) scale(1.2) rotate(360deg);
+    }
+}
+
+@keyframes scan-line {
+    0% {
+        transform: translateX(0);
+        background: linear-gradient(to right, rgba(255, 215, 0, 0), #ffd700 50%, rgba(255, 215, 0, 0));
+    }
+
+    50% {
+        transform: translateX(20%);
+        background: linear-gradient(to right, rgba(255, 215, 0, 0), #ffd700 70%, rgba(255, 215, 0, 0));
+    }
+
+    100% {
+        transform: translateX(0);
+        background: linear-gradient(to right, rgba(255, 215, 0, 0), #ffd700 50%, rgba(255, 215, 0, 0));
+    }
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes rotateRing {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+}
+
+@keyframes breathe {
+    0% {
+        transform: translateX(3vw) scale(1.7);
+    }
+
+    50% {
+        transform: translateX(3vw) scale(1.8);
+    }
+
+    100% {
+        transform: translateX(3vw) scale(1.7);
+    }
+}
+
+@keyframes smokeRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+    }
+
+    30% {
+        transform: translateY(-20px) scale(1.2);
+        opacity: 0.5;
+    }
+
+    60% {
+        transform: translateY(-40px) scale(1.4);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(-60px) scale(1.6);
+        opacity: 0;
+    }
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-25px) scale(1.2);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(-50px) scale(1.4);
+        opacity: 0.2;
+    }
+}
+
+@keyframes breatheRing {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) rotate(180deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes linePulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    }
+
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+    }
+}
+
+@keyframes ring-decoration {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: scale(1.2);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes markerPulse {
+
+    0%,
+    100% {
+        height: 6px;
+        opacity: 0.7;
+    }
+
+    50% {
+        height: 12px;
+        opacity: 1;
+    }
+}
+
+@keyframes valueFlicker {
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    20%,
+    80% {
+        opacity: 1;
+    }
+}
+
+@keyframes originPulse {
+
+    0%,
+    100% {
+        transform: translateY(-50%) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-50%) scale(1.3);
+        opacity: 1;
+    }
+}
+
+@keyframes disappear {
+    from{
+        opacity: 1;
+    }
+
+    to{
+        opacity: 0;
+    }
+}

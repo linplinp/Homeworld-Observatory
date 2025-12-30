@@ -1,0 +1,2163 @@
+.container-01{
+    position: fixed;
+    font-size: 1.2vw;
+    color: #ffffff;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+    left: -8.5vw;
+    top: 50vh;
+    transition: left .3s ease;
+}
+
+
+.container-02{
+    position: fixed;
+    font-size: 1.2vw;
+    color: #ffffff;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+    left: -60vw;
+    top: 50vh;
+    transition: left .3s ease;
+
+}
+
+li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#toggle-menu{
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.toggle-menu{
+    position: absolute;
+    color: rgba(0, 0, 0, 0);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.8rem;
+    z-index: 999;
+    transition: transform .3s,
+                opacity .3s,
+                color .3s ease;
+    top: 10vh;
+    left: 50vw;
+    height: 4vh;
+    transform: translate(-50%);
+    white-space: nowrap;
+    -webkit-text-stroke-color: rgb(227, 205, 36);
+    -webkit-text-stroke-width: 0.3px;
+    letter-spacing: 1.2px;
+}
+
+.toggle-menu:hover{
+    color: rgb(227, 205, 36);
+    -webkit-text-stroke-width: 0px;
+}
+
+.toggle-menu-p-01{
+    text-align: center;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0%);
+    transition: opacity .3s ease,
+                transform .3s ease;
+    animation: log-pouse 5s infinite;
+    position: relative;
+}
+
+.toggle-menu-p-01::before{
+    content: '➺';
+    position: absolute;
+    font-size: 2.5rem;
+    top: 45%;
+    left: 3vw;
+    transform: translateY(-50%);
+}
+
+.toggle-menu-p-01::after{
+    content: '➺';
+    position: absolute;
+    font-size: 2.5rem;
+    top: 60%;
+    right: 3.2vw;
+    transform: translateY(-50%) rotateZ(180deg);
+}
+
+.toggle-menu-p-02{
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(110%,-100%);
+    transition: opacity .3s ease,
+                transform .3s ease;
+    animation: log-pouse 5s infinite;
+}
+
+.toggle-menu-p-02::before{
+    content: '➺';
+    position: absolute;
+    font-size: 2.5rem;
+    top: 45%;
+    left: -3vw;
+    transform: translateY(-50%);
+}
+
+.toggle-menu-p-02::after{
+    content: '➺';
+    position: absolute;
+    font-size: 2.5rem;
+    top: 60%;
+    right: -3vw;
+    transform: translateY(-50%) rotateZ(180deg);
+}
+
+#toggle-menu:checked ~ .interface .container-01{ 
+    left: -60vw;
+    transition: left .3s ease;
+    pointer-events: none;
+}
+
+#toggle-menu:checked ~ .interface .container-02{
+    left: -8.5vw;
+    transition: left .3s ease;
+    pointer-events: auto;
+}
+
+#toggle-menu:checked ~ .interface .toggle-menu .toggle-menu-p-01{
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(110%);
+    transition: opacity .3s ease,
+                transform .3s ease;
+}
+
+#toggle-menu:checked ~ .interface .toggle-menu .toggle-menu-p-02{
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0%,-100%);
+    transition: opacity .3s ease,
+                transform .3s ease;
+}
+
+#toggle-menu:checked ~ .orbit-container-1,
+#toggle-menu:checked ~ .orbit-container-2{
+    opacity: 0;
+    visibility: hidden;
+    scale: 2 ;
+    transition: opacity .3s ease,
+                scale .1s ease;
+} 
+
+#toggle-menu:checked ~ .magic-circle .mc-01,
+#toggle-menu:checked ~ .mc-02{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .3s ease,
+                top 0.7s cubic-bezier(.67,0,.34,1.01);
+    top: -20%;
+} 
+
+.list{
+    position: absolute;
+    transition: .3s;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+}
+
+.log-button {
+    border-width: 1px;
+    border-style: solid none solid none;
+    border-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(204, 201, 50, 0.701),rgba(0, 0, 139, 0)) 1;
+    width: 29vw;
+    height: 8vh;
+    background-color: rgba(90, 90, 90, 0.142);
+    border-radius: 1vw;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.log-end{
+    text-align: center;
+    margin-left: 8vw;
+}
+
+.log-button.active{
+    background-color: rgba(102, 101, 59, 0.134);
+    border: rgb(227, 205, 36) 1.5px solid;
+    box-shadow: 0 0 10px 2px rgb(255, 236, 95);
+    animation: alternate-log-pulse 2s infinite;
+    margin-left: 2vw;
+
+    .log-text {
+        font-size: 1.3vw;
+        letter-spacing: 2px;
+    }
+
+    .log-text-02 {
+        font-size: 1.6vw;
+        margin-left: 13.5vw;
+    }
+
+
+
+}
+
+.log-button.active::before{
+    content: '';
+    position: absolute;
+    width: 3vh;
+    height: 3vh;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background: rgb(227, 205, 36);
+    box-shadow: 0 0 10px 2px rgb(255, 236, 95);
+    top: 50%;
+    left: 29vw;
+    transform: translate(-50%, -50%) rotate(270deg);
+    animation: selected-move 2s infinite;
+}
+
+.log-text {
+    cursor: pointer;
+    margin-left: 13vw;
+    text-align: center;
+    font-size: 1vw;
+    letter-spacing: 2px;
+    color: #ffffff;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+    text-decoration: none;
+    transition: .3s;
+    margin-bottom: 1.5vh;
+    white-space: nowrap;
+}
+
+.log-text-02{
+    cursor: pointer;
+    margin-left: 15.2vw;
+    text-align: center;
+    font-size: 1vw;
+    letter-spacing: 2px;
+    color: #ffffff;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+    text-decoration: none;
+    transition: .3s;
+    margin-bottom: 1.5vh;
+    white-space: nowrap;
+}
+
+.log-button:not(.active):hover {    /* 只有非 active 才受 hover 影響 */
+    box-shadow: #fff 1px 1px 10px 1px;
+    background-color: rgb(74, 74, 74);
+    transform: scale(1.1); 
+}
+
+.log-text-sub {
+    position: absolute;
+    left: 15vw;
+    top: 5vh;
+    font-size: 0.9vw;
+    letter-spacing: 3px;
+    white-space: nowrap;
+    color: rgb(255, 255, 255);
+    /* padding: 0vw 3vw 0vw 3vw; */
+}
+
+.log-text-sub::before{
+    content: '';
+    position: absolute;
+    width: 2vw;
+    height: 3px;
+    background: linear-gradient(to right,rgb(227, 205, 36),rgba(227, 205, 36, 0));
+    top: 50%;
+    left: 8.3vw;
+    z-index: -1;
+}
+
+.log-text-sub::after{
+    content: '';
+    position: absolute;
+    width: 2vw;
+    height: 3px;
+    background: linear-gradient(to left,rgb(227, 205, 36),rgba(227, 205, 36, 0));
+    top: 50%;
+    right: 8.3vw;
+    z-index: -1;
+}
+.log-text-sub-02{
+    position: absolute;
+    left: 15vw;
+    top: 5vh;
+    font-size: 0.9vw;
+    letter-spacing: 3px;
+    white-space: nowrap;
+    color: rgb(255, 255, 255);
+    /* padding: 0vw 3vw 0vw 3vw; */
+}
+
+.log-text-sub-02::before{
+    content: '';
+    position: absolute;
+    width: 2vw;
+    height: 3px;
+    background: linear-gradient(to right,rgb(211, 209, 195),rgba(227, 205, 36, 0));
+    top: 50%;
+    left: 4.5vw;
+    z-index: -1;
+}
+
+.log-text-sub-02::after{
+    content: '';
+    position: absolute;
+    width: 2vw;
+    height: 3px;
+    background: linear-gradient(to left,rgb(211, 209, 195),rgba(227, 205, 36, 0));
+    top: 50%;
+    right: 4.5vw;
+    z-index: -1;
+}
+
+.c1 {
+    background-image: url(../pic/icon/01_Igniferrosulfute-α.webp);
+    background-repeat: no-repeat;
+    background-size: 2.4vw;
+    background-position: 8.5vw center;
+}
+
+.c2 {
+    background-image: url(../pic/icon/02_Levaluminosilicate.webp);
+    background-repeat: no-repeat;
+    background-size: 2.4vw;
+    background-position: 8.5vw center;
+}
+
+.c3 {
+    background-image: url(../pic/icon/03_Chlorosanguine\ Resin.webp);
+    background-repeat: no-repeat;
+    background-size: 2.2vw;
+    background-position: 8.5vw center;
+}
+
+.c4 {
+    background-image: url(../pic/icon/04_Bathypiezolumite.webp);
+    background-repeat: no-repeat;
+    background-size: 2.7vw;
+    background-position: 8.5vw center;
+}
+
+.c5 {
+    background-image: url(../pic/icon/05_Radio-Arsenolite.webp);
+    background-repeat: no-repeat;
+    background-size: 2.7vw;
+    background-position: 8.5vw center;
+}
+
+.c6 {
+    background-image: url(../pic/icon/06_Iso-Chronal\ Carbon.webp);
+    background-repeat: no-repeat;
+    background-size: 2.9vw;
+    background-position: 8.5vw center;
+}
+
+.c7 {
+    background-image: url(../pic/icon/07_Cryo-Hygrolite.webp);
+    background-repeat: no-repeat;
+    background-size: 2.5vw;
+    background-position: 8.5vw center;
+}
+
+.c8 {
+    background-image: url(../pic/icon/08_Electro-Ferrite\ Resonance\ Ore.webp);
+    background-repeat: no-repeat;
+    background-size: 2.7vw;
+    background-position: 8.5vw center;
+}
+
+.c9 {
+    background-image: url(../pic/icon/09_Neuro-Crystalline\ Quartz.webp);
+    background-repeat: no-repeat;
+    background-size: 2.7vw;
+    background-position: 8.5vw center;
+
+}
+
+.c10 {
+    background-image: url(../pic/icon/10_Exo-Tungstite\ Alloy.webp);
+    background-repeat: no-repeat;
+    background-size: 2.7vw;
+    background-position: 8.5vw center;
+}
+
+.c12 {
+    background-image: url(../pic/icon/Aeturnum.webp);
+    background-repeat: no-repeat;
+    background-size:9.5vw;
+    background-position: 6vw center;
+}
+
+.c13 {
+    background-image: url(../pic/icon/Phasium.webp);
+    background-repeat: no-repeat;
+    background-size:7.6vw;
+    background-position: 6vw center;
+}
+
+.c14 {
+    background-image: url(../pic/icon/Ignarium.webp);
+    background-repeat: no-repeat;
+    background-size:7.6vw;
+    background-position: 6vw center;
+}
+
+.c15 {
+    background-image: url(../pic/icon/Neuridium.webp);
+    background-repeat: no-repeat;
+    background-size:7.6vw;
+    background-position: 6vw center;
+}
+
+.c16 {
+    background-image: url(../pic/icon/Gravium.webp);
+    background-repeat: no-repeat;
+    background-size:7.6vw;
+    background-position: 6vw center;
+}
+.tab-ores input[type="radio"] {
+  display: none;
+}
+
+/* 全局統一樣式 */
+
+.log-01,
+.log-02,
+.log-03,
+.log-04,
+.log-05,
+.log-06,
+.log-07,
+.log-08,
+.log-09,
+.log-10{
+    position: relative;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(3rem);
+    transition: opacity 0.3s ease,
+                transform 0.3s ease;
+}
+
+.log-content-01,
+.log-content-02,
+.log-content-03,
+.log-content-04,
+.log-content-05,
+.log-content-06,
+.log-content-07,
+.log-content-08,
+.log-content-09,
+.log-content-10,
+.log-content-11{
+    position: fixed;
+    left: 50vw;
+    top: 75vh;
+    width: 100vw;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: center;
+    padding: 10vw 10vw 10vw 10vw;
+    pointer-events: none;
+}
+
+.log-content-01::before,
+.log-content-02::before,
+.log-content-03::before,
+.log-content-04::before,
+.log-content-05::before,
+.log-content-06::before,
+.log-content-07::before,
+.log-content-08::before,
+.log-content-09::before,
+.log-content-10::before{
+    content:'';
+    width: 60vw;
+    height: 40vh;
+    border-radius: 100vw;
+    position: absolute;
+    opacity: 0.6;
+    filter: blur(70px);
+    transform: translate(-50%) rotateX(80deg); 
+}
+
+.log-01 h1,
+.log-02 h1,
+.log-03 h1,
+.log-04 h1,
+.log-05 h1,
+.log-06 h1,
+.log-07 h1,
+.log-08 h1,
+.log-09 h1,
+.log-10 h1,
+.log-11 h1{
+    position: absolute;
+    font-size: 2.7vw;
+    color: #fffffff6;
+    font-family: 'Microsoft JhengHei ';
+    font-style: italic;
+    font-weight: 500;
+    top: 18vh;
+    left: 12vw;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 2px 2px;
+}
+
+.log-01 h1::before{
+    content:'"燼紅石"';
+    position: absolute;
+    top: 110%;
+    left: 78%;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.log-01 h1::after{
+    content: '';
+    position: absolute;
+    width: 16.5vw;
+    height: 3vh;
+    background-color: rgba(255, 215, 0, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg);
+    top: 70%;
+    left: 15%;
+    z-index: -1;
+}
+
+.log-02 h1::before{
+    content:'"天青浮岩"';
+    position: absolute;
+    top: 110%;
+    left: 75%;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.log-02 h1::after{
+    content: '';
+    position: absolute;
+    width: 20vw;
+    height: 3vh;
+    background-color: rgba(255, 215, 0, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg);
+    top: 70%;
+    left: 10%;
+    z-index: -1;
+}
+
+.log-03 h1::before{
+    content:'"森脈琥珀"';
+    position: absolute;
+    top: 110%;
+    left: 75%;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.log-03 h1::after{
+    content: '';
+    position: absolute;
+    width: 17vw;
+    height: 3vh;
+    background-color: rgba(255, 215, 0, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg);
+    top: 70%;
+    left: 10%;
+    z-index: -1;
+}
+
+.log-04 h1::before{
+    content:'"淵洋藍晶"';
+    position: absolute;
+    top: 110%;
+    left: 75%;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.log-04 h1::after{
+    content: '';
+    position: absolute;
+    width: 22vw;
+    height: 3vh;
+    background-color: rgba(255, 215, 0, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg);
+    top: 70%;
+    left: 10%;
+    z-index: -1;
+}
+
+.log-05 h1::before{
+    content:'"蝕骨翠玉"';
+    position: absolute;
+    top: 110%;
+    left: 75%;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.log-05 h1::after{
+    content: '';
+    position: absolute;
+    width: 15vw;
+    height: 3vh;
+    background-color: rgba(255, 215, 0, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg);
+    top: 70%;
+    left: 10%;
+    z-index: -1;
+}
+
+.log-06 h1::before{
+    content:'"恆金剛"';
+    position: absolute;
+    top: 110%;
+    left: 85%;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.log-06 h1::after{
+    content: '';
+    position: absolute;
+    width: 23vw;
+    height: 3vh;
+    background-color: rgba(255, 215, 0, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg);
+    top: 70%;
+    left: 10%;
+    z-index: -1;
+}
+
+.log-07 h1::before{
+    content:'"霜泣石"';
+    position: absolute;
+    top: 110%;
+    left: 85%;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.log-07 h1::after{
+    content: '';
+    position: absolute;
+    width: 23vw;
+    height: 3vh;
+    background-color: rgba(255, 215, 0, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg);
+    top: 70%;
+    left: 10%;
+    z-index: -1;
+}
+
+.log-08 h1::before{
+    content:'"雷鳴黑鐵"';
+    position: absolute;
+    top: 110%;
+    left: 75%;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.log-08 h1::after{
+    content: '';
+    position: absolute;
+    width: 17vw;
+    height: 3vh;
+    background-color: rgba(255, 215, 0, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg);
+    top: 70%;
+    left: 12%;
+    z-index: -1;
+}
+
+.log-09 h1::before{
+    content:'"幻夢石英"';
+    position: absolute;
+    top: 96%;
+    left: 75%;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.log-09 h1::after{
+    content: '';
+    position: absolute;
+    width: 18vw;
+    height: 3vh;
+    background-color: rgba(255, 215, 0, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg);
+    top: 70%;
+    left: 10%;
+    z-index: -1;
+}
+
+.log-10 h1::before{
+    content:'"星骸鎢金"';
+    position: absolute;
+    top: 96%;
+    left: 75%;
+    font-size: 2vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.log-10 h1::after{
+    content: '';
+    position: absolute;
+    width: 20vw;
+    height: 3vh;
+    background-color: rgba(255, 215, 0, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg);
+    top: 70%;
+    left: 10%;
+    z-index: -1;
+}
+
+#tab-ore1:checked ~ .log-01,
+#tab-ore2:checked ~ .log-02,
+#tab-ore3:checked ~ .log-03,
+#tab-ore4:checked ~ .log-04,
+#tab-ore5:checked ~ .log-05,
+#tab-ore6:checked ~ .log-06,
+#tab-ore7:checked ~ .log-07,
+#tab-ore8:checked ~ .log-08,
+#tab-ore9:checked ~ .log-09,
+#tab-ore10:checked ~ .log-10{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.4s ease,
+                transform 0.6s ease;
+}
+
+.log-content-01{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(227, 107, 2, 0.2));
+}
+
+.log-content-01::before{
+    left: 50%;
+    top: 55vh;
+    background-color: #ff2f1cea;
+}
+
+.log-img-01{
+    width: 49vw;
+    height: auto;
+    margin-bottom: 32vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-article-01-01{
+    position: absolute;
+    font-size: 1vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 58vh;
+    left: 68vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+    background: linear-gradient(45deg,#cc79412d,#ffffff00);
+    padding: 0.8vw;
+    border: 2px solid #cc84412d ;
+    border-radius: 2vw;
+}
+
+.log-article-01-02{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 26vh;
+    left: 58vw;
+    line-height: 2vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-01-02::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    top: 390%;
+    right: 10.8vw;
+    width: 14vw;
+    height: 1px;
+    transform: rotate(310deg);
+}
+
+.log-article-01-03{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 80vh;
+    left: 25vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-01-03::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    bottom: 140%;
+    left: 16.5vw;
+    width: 8vw;
+    height: 1px;
+    transform: rotate(315deg);
+}
+
+.log-content-02{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(144, 201, 211, 0.2));
+}
+
+.log-content-02::before{
+    left: 50%;
+    top: 79vh;
+    background-color: #b5fbfff7;
+}
+
+.log-img-02{
+    width: 75vw;
+    height: auto;
+    margin-bottom: 42vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-article-02-01{
+    position: absolute;
+    font-size: 0.9vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 62vh;
+    left: 67vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+    background: linear-gradient(45deg,#41ccb52d,#ffffff00);
+    padding: 0.8vw;
+    border: 2px solid #41ccb52d ;
+    border-radius: 2vw;
+}
+
+.log-article-02-02{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 22vh;
+    left: 52vw;
+    line-height: 2vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-02-02::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    top: 200%;
+    right: 16.8vw;
+    width: 5vw;
+    height: 1px;
+    transform: rotate(320deg);
+}
+
+.log-article-02-03{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 77vh;
+    left: 28vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-02-03::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    bottom: 130%;
+    left: 15.5vw;
+    width: 7vw;
+    height: 1px;
+    transform: rotate(315deg);
+}
+
+.log-content-03{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(137, 255, 68, 0.2));
+}
+
+.log-content-03::before{
+    left: 50%;
+    top: 65vh;
+    background-color: #cef814ea;
+}
+
+.log-img-03{
+    width: 55vw;
+    height: auto;
+    margin-bottom: 42vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-article-03-01{
+    position: absolute;
+    font-size: 1vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 62vh;
+    left: 67vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+    background: linear-gradient(45deg,#41ccb52d,#ffffff00);
+    padding: 0.8vw;
+    border: 2px solid #41ccb52d ;
+    border-radius: 2vw;
+}
+
+.log-article-03-02{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 26vh;
+    left: 56vw;
+    line-height: 2vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-03-02::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    top: 600%;
+    right: 6.8vw;
+    width: 12vw;
+    height: 1px;
+    transform: rotate(305deg);
+}
+
+.log-article-03-03{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 77vh;
+    left: 26vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-03-03::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    bottom: 180%;
+    left: 12.5vw;
+    width: 7vw;
+    height: 1px;
+    transform: rotate(315deg);
+}
+
+.log-content-04{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(15, 171, 255, 0.2));
+}
+
+.log-content-04::before{
+    left: 50%;
+    top: 67vh;
+    background-color: #5578f8ea;
+}
+
+.log-img-04{
+    width: 65vw;
+    height: auto;
+    margin-bottom: 30vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-article-04-01{
+    position: absolute;
+    font-size: 1vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 62vh;
+    left: 67vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+    background: linear-gradient(45deg,#41ccb52d,#ffffff00);
+    padding: 0.8vw;
+    border: 2px solid #41ccb52d ;
+    border-radius: 2vw;
+}
+
+.log-article-04-02{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 24vh;
+    left: 51vw;
+    line-height: 2vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-04-02::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    top: 380%;
+    right: 14.8vw;
+    width: 8vw;
+    height: 1px;
+    transform: rotate(320deg);
+}
+
+.log-article-04-03{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 82vh;
+    left: 19vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-04-03::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    bottom: 260%;
+    left: 18.5vw;
+    width: 17vw;
+    height: 1px;
+    transform: rotate(325deg);
+}
+
+.log-content-05{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 148, 108, 0.2));
+}
+
+.log-content-05::before{
+    left: 50%;
+    top: 79vh;
+    background-color: #b5ffbfea;
+}
+
+.log-img-05{
+    width: 70vw;
+    height: auto;
+    margin-bottom: 42vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-article-05-01{
+    position: absolute;
+    font-size: 1vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 62vh;
+    left: 69vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+    background: linear-gradient(45deg,#41ccb52d,#ffffff00);
+    padding: 0.8vw;
+    border: 2px solid #41ccb52d ;
+    border-radius: 2vw;
+}
+
+.log-article-05-02{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 19vh;
+    left: 62vw;
+    line-height: 2vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-05-02::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    top: 390%;
+    right: 18.2vw;
+    width: 8vw;
+    height: 1px;
+    transform: rotate(320deg);
+}
+
+.log-article-05-03{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 77vh;
+    left: 20.5vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-05-03::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    bottom: 210%;
+    left: 21vw;
+    width: 10vw;
+    height: 1px;
+    transform: rotate(315deg);
+}
+
+
+
+
+.log-content-06{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(41, 8, 255, 0.2));
+}
+
+.log-content-06::before{
+    left: 50%;
+    top: 79vh;
+    background-color: #b5b5ffea;
+}
+
+.log-img-06{
+    width: 76vw;
+    height: auto;
+    margin-bottom: 42vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-article-06-01{
+    position: absolute;
+    font-size: 1.1vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 62vh;
+    left: 68vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+    background: linear-gradient(45deg,#41ccb52d,#ffffff00);
+    padding: 0.8vw;
+    border: 2px solid #41ccb52d ;
+    border-radius: 2vw;
+}
+
+.log-article-06-02{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 19vh;
+    left: 59vw;
+    line-height: 2vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-06-02::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    top: 90%;
+    right: 17.8vw;
+    width: 5vw;
+    height: 1px;
+    transform: rotate(340deg);
+}
+
+.log-article-06-03{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 87vh;
+    left: 18vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-06-03::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    bottom: 115%;
+    left: 25.5vw;
+    width: 3vw;
+    height: 1px;
+    transform: rotate(325deg);
+}
+
+.log-content-07{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(223, 250, 255, 0.2));
+}
+
+.log-content-07::before{
+    left: 50%;
+    top: 75vh;
+    background-color: #b5ffe9ea;
+}
+
+.log-img-07{
+    width: 65vw;
+    height: auto;
+    margin-bottom: 42vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-article-07-01{
+    position: absolute;
+    font-size: 1vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 62vh;
+    left: 69vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+    background: linear-gradient(45deg,#41ccb52d,#ffffff00);
+    padding: 0.8vw;
+    border: 2px solid #41ccb52d ;
+    border-radius: 2vw;
+}
+
+.log-article-07-02{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 19vh;
+    left: 58vw;
+    line-height: 2vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-07-02::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    top: 280%;
+    left: -6.5vw;
+    width: 7vw;
+    height: 1px;
+    transform: rotate(315deg);
+}
+
+.log-article-07-03{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 82vh;
+    left: 14vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-07-03::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    bottom: 115%;
+    left: 21vw;
+    width: 3vw;
+    height: 1px;
+    transform: rotate(325deg);
+}
+
+.log-content-08{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 237, 116, 0.2));
+}
+
+.log-content-08::before{
+    left: 50%;
+    top: 67vh;
+    background-color: #fff0b5ea;
+}
+
+.log-img-08{
+    width: 55vw;
+    height: auto;
+    margin-bottom: 42vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-article-08-01{
+    position: absolute;
+    font-size: 1.1vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 62vh;
+    left: 68vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+    background: linear-gradient(45deg,#cacc412d,#ffffff00);
+    padding: 0.8vw;
+    border: 2px solid #ccc3412d ;
+    border-radius: 2vw;
+}
+
+.log-article-08-02{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 19vh;
+    left: 59vw;
+    line-height: 2vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-08-02::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    top: 250%;
+    right: 22vw;
+    width: 6vw;
+    height: 1px;
+    transform: rotate(300deg);
+}
+
+.log-article-08-03{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 80vh;
+    left: 28vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-08-03::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    bottom: 500%;
+    left: 12.5vw;
+    width: 14vw;
+    height: 1px;
+    transform: rotate(305deg);
+}
+
+.log-content-09{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(111, 86, 132, 0.2));
+}
+
+.log-content-09::before{
+    left: 50%;
+    top: 67vh;
+    background-color: #e4b5ffea;
+}
+
+.log-img-09{
+    width: 55vw;
+    height: auto;
+    margin-bottom: 34vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-article-09-01{
+    position: absolute;
+    font-size: 0.9vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 63vh;
+    left: 64.5vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+    background: linear-gradient(45deg,#d6b2e42d,#ffffff00);
+    padding: 0.8vw;
+    border: 2px solid #cc41ca2d ;
+    border-radius: 2vw;
+}
+
+.log-article-09-02{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 54vh;
+    left: 67vw;
+    line-height: 2vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-09-02::before{
+    content: '';
+    background: #ffffff;
+    position: absolute;
+    top: 140%;
+    right: 22.5vw;
+    width: 10vw;
+    height: 1px;
+    transform: rotate(350deg);
+}
+
+.log-article-09-03{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 77vh;
+    left: 6vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-09-03::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    bottom: 105%;
+    left: 26vw;
+    width: 3vw;
+    height: 1px;
+    transform: rotate(325deg);
+}
+
+.log-content-10{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgb(18, 0, 23));
+    mix-blend-mode: darken;
+}
+
+.log-content-10::before{
+    left: 50%;
+    top: 67vh;
+    background-color: #4c2d7eea;
+}
+
+.log-img-10{
+    width: 70vw;
+    height: auto;
+    margin-bottom: 30vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-article-10-01{
+    position: absolute;
+    font-size: 0.9vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 59vh;
+    left: 67vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+    background: linear-gradient(45deg,#6f517963,#ffffff00);
+    padding: 0.8vw;
+    border: 2px solid #ffffff30 ;
+    border-radius: 2vw;
+}
+
+.log-article-10-02{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 28vh;
+    left: 45vw;
+    line-height: 2vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-10-02::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    top: 180%;
+    right: 15.3vw;
+    width: 5vw;
+    height: 1px;
+    transform: rotate(325deg);
+}
+
+.log-article-10-03{
+    position: absolute;
+    font-size: 0.76vw;
+    color: #e5e5e5;
+    font-family:'Microsoft JhengHei ','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    top: 82vh;
+    left: 18vw;
+    line-height: 3vh;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}
+
+.log-article-10-03::before{
+    content: '';
+    background: #fff;
+    position: absolute;
+    bottom: 210%;
+    left: 18.1vw;
+    width: 14vw;
+    height: 1px;
+    transform: rotate(315deg);
+}
+
+.log-content-11{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(7, 7, 7, 0.447));
+}
+
+.log-img-11{
+    width: 80vw;
+    height: auto;
+    margin-bottom: 42vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-11{
+    position: fixed;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.4);
+    transition: opacity 0.3s ease,
+                transform 0.3s ease;
+}
+
+#tab-ore11:checked ~ .log-11{
+    opacity: .8;
+    visibility: visible;
+    transform: scale(1);
+    transition: opacity 0.3s ease,
+                transform 0.3s ease;
+}
+
+.log-12,
+.log-13,
+.log-14,
+.log-15,
+.log-16{
+    position: relative;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(3rem);
+    transition: opacity 0.3s ease,
+                transform 0.3s ease;
+}
+
+.log-content-12,
+.log-content-13,
+.log-content-14,
+.log-content-15,
+.log-content-16{
+    position: fixed;
+    left: 50vw;
+    top: 75vh;
+    width: 100vw;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: center;
+    padding: 10vw 10vw 10vw 10vw;
+    pointer-events: none;
+}
+
+.log-content-12::before,
+.log-content-13::before,
+.log-content-14::before,
+.log-content-15::before,
+.log-content-16::before{
+    content:'';
+    width: 60vw;
+    height: 40vh;
+    border-radius: 100vw;
+    position: absolute;
+    opacity: 0.6;
+    filter: blur(70px);
+    transform: translate(-50%) rotateX(80deg); 
+}
+
+.log-12 h1,
+.log-13 h1,
+.log-14 h1,
+.log-15 h1,
+.log-16 h1{
+    position: fixed;
+    font-size: 3.2vw;
+    color: #fffffff6;
+    font-family: 'Microsoft JhengHei ';
+    font-style: italic;
+    font-weight: 500;
+    top: 20vh;
+    left: 16vw;
+    white-space: nowrap;
+    z-index: 999;
+    text-shadow: rgb(0, 0, 0) 2px 2px;
+}
+
+
+.log-13 h1::after,
+.log-16 h1::after{
+    content: '';
+    position: absolute;
+    width: 14.5vw;
+    height: 3vh;
+    background-color: rgba(227, 208, 37, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg) translate(60%);
+    top: 6.6vh;
+    left: -50%;
+    z-index: -1;
+}
+
+.log-12 h1::after{
+    content: '';
+    position: absolute;
+    width: 17vw;
+    height: 3vh;
+    background-color: rgba(227, 208, 37, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg) translate(60%);
+    top: 6.6vh;
+    left: -50%;
+    z-index: -1;
+}
+
+.log-14 h1::after{
+    content: '';
+    position: absolute;
+    width: 15.5vw;
+    height: 3vh;
+    background-color: rgba(227, 208, 37, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg) translate(60%);
+    top: 6.6vh;
+    left: -50%;
+    z-index: -1;
+}
+
+.log-15 h1::after{
+    content: '';
+    position: absolute;
+    width: 16vw;
+    height: 3vh;
+    background-color: rgba(227, 208, 37, 0.95);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    transform: skewX(-20deg) translate(65%);
+    top: 6.6vh;
+    left: -50%;
+    z-index: -1;
+}
+
+#tab-ore12:checked ~ .log-12,
+#tab-ore13:checked ~ .log-13,
+#tab-ore14:checked ~ .log-14,
+#tab-ore15:checked ~ .log-15,
+#tab-ore16:checked ~ .log-16{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.4s ease,
+                transform 0.6s ease;
+}
+
+.magic-circle{
+    opacity: 1;
+    visibility: visible;
+}
+
+.log-content-12{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(26, 24, 27, 0.356));
+}
+
+.log-img-12{
+    width: 80vw;
+    height: auto;
+    margin-bottom: 30vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-12 h1::before{
+    content: '"艾特諾"';
+    position: absolute;
+    top: 100%;
+    left: 90%;
+    transform: translate(-50%);
+    font-size: 2vw;
+}
+
+
+.log-content-13{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(26, 24, 27, 0.356));
+}
+
+.log-img-13{
+    width: 70vw;
+    height: auto;
+    margin-bottom: 30.5vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-13 h1::before{
+    content: '"費濟姆"';
+    position: absolute;
+    top: 100%;
+    left: 90%;
+    transform: translate(-50%);
+    font-size: 2vw;
+}
+
+.log-content-14{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(26, 24, 27, 0.356));
+}
+
+.log-img-14{
+    width: 70vw;
+    height: auto;
+    margin-bottom: 33vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-14 h1::before{
+    content: '"伊格尼斯"';
+    position: absolute;
+    top: 100%;
+    left: 90%;
+    transform: translate(-50%);
+    font-size: 2vw;
+}
+
+.log-content-15{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(26, 24, 27, 0.356));
+}
+
+.log-img-15{
+    width: 60vw;
+    height: auto;
+    margin-bottom: 40vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-15 h1::before{
+    content: '"紐瑞迪"';
+    position: absolute;
+    top: 100%;
+    left: 90%;
+    transform: translate(-50%);
+    font-size: 2vw;
+}
+
+.log-content-16{
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(26, 24, 27, 0.356));
+}
+
+.log-img-16{
+    width: 70vw;
+    height: auto;
+    margin-bottom: 45vh;
+    animation: emission 5s infinite alternate;
+}
+
+.log-16 h1::before{
+    content: '"格拉維姆"';
+    position: absolute;
+    top: 100%;
+    left: 90%;
+    transform: translate(-50%);
+    font-size: 2vw;
+}
+
+@keyframes log-pulse {
+    0% {
+        box-shadow: 0 0 5px 2px rgb(255, 236, 95);
+    }
+    50% {
+        box-shadow: 0 0 15px 5px rgb(255, 236, 95);
+    }
+    100% {
+        box-shadow: 0 0 5px 2px rgb(255, 236, 95);
+    }
+}
+
+@keyframes alternate-log-pulse {
+    0% {
+        box-shadow: 0 0 10px 2px rgb(255, 236, 95);
+    }
+    50% {
+        box-shadow: 0 0 20px 5px rgb(255, 236, 95);
+    }
+    100% {
+        box-shadow: 0 0 10px 2px rgb(255, 236, 95);
+    }
+}
+
+@keyframes selected-move {
+    0% {
+        transform: translate(-50%, -50%) rotate(270deg) translateY(0%);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(270deg) translateY(-20%);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(270deg) translateY(0%);
+    }
+}
+
+@keyframes emission {
+    0% {
+        filter: brightness(1.2)
+                contrast(1.1);
+        /* transform: scale(1); */
+    }
+
+    25% {
+        filter: brightness(1.3)
+                contrast(1.1);
+    }
+
+    50% {
+        filter: brightness(1.2)
+                contrast(1.1);
+        /* transform: scale(1.02); */
+
+    }
+
+    75% {
+        filter: brightness(0.9)
+                contrast(1.1);
+    }
+
+    100% {
+        filter: brightness(1.2)
+                contrast(1.1);
+        /* transform: scale(1); */
+    }
+}
+
+.mix{
+    position: fixed;
+    z-index: 9999;
+}
+
+.crt-overlay {
+    /* 霸佔整個視窗，不隨捲動跑掉 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* 讓滑鼠穿透這個層，才點得到下面的東西 */
+    pointer-events: none;
+    
+    /* 確保它蓋在最上面 (比電梯還要高) */
+    z-index: 999;
+    
+    /* 暗角效果：四周變暗，模擬圓形映像管 */
+    background: radial-gradient(
+        circle,
+        rgba(0, 0, 0, 0) 60%, 
+        rgba(0, 0, 0, 0.4) 80%, 
+        rgba(0, 0, 0, 0.8) 100%
+    );
+    background-color: rgb(162, 0, 0); /* 整體綠色調 */
+    mix-blend-mode: overlay; /* 讓顏色和下面內容混合 */
+}
+
+.crt-overlay-2 {
+    /* 霸佔整個視窗，不隨捲動跑掉 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* 讓滑鼠穿透這個層，才點得到下面的東西 */
+    pointer-events: none;
+    
+    /* 確保它蓋在最上面 (比電梯還要高) */
+    z-index: 9999;
+    
+    /* 暗角效果：四周變暗，模擬圓形映像管 */
+    background: radial-gradient(
+        circle,
+        rgba(0, 0, 0, 0) 60%, 
+        rgba(0, 0, 0, 0.4) 80%, 
+        rgba(0, 0, 0, 0.8) 100%
+    );
+    background-color: rgb(255, 255, 255); /* 整體綠色調 */
+    mix-blend-mode: overlay;
+}
+
+.crt-overlay-2 {
+    /* 霸佔整個視窗，不隨捲動跑掉 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* 讓滑鼠穿透這個層，才點得到下面的東西 */
+    pointer-events: none;
+    
+    /* 確保它蓋在最上面 (比電梯還要高) */
+    z-index: 9999;
+    
+    /* 暗角效果：四周變暗，模擬圓形映像管 */
+    background: radial-gradient(
+        circle,
+        rgba(0, 0, 0, 0) 60%, 
+        rgba(0, 0, 0, 0.4) 80%, 
+        rgba(0, 0, 0, 0.8) 100%
+    );
+    background-color: rgb(255, 255, 255); /* 整體綠色調 */
+    mix-blend-mode: multiply;
+    animation: disappear-crt;
+}
+
+@keyframes disappear-crt {
+
+
+
+    
+}
+
+/* 掃描線層 */
+.scanlines {
+    width: 100%;
+    height: 100%;
+    
+    /* 製作橫條紋 */
+    /* 使用重複線性漸層：透明 -> 黑色半透明 -> 透明 */
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0) 50%,
+        rgba(0, 0, 0, 0.8) 50%, /* a是線條深淺，可調整 */
+        rgba(0, 0, 0, 0.8)
+    );
+    
+    /* 線條密度： N px 一個循環 */
+    background-size: 100% 5px; 
+    
+    /* 加入微微閃爍動畫 */
+    animation: flicker-02 0.15s infinite;
+}
+
+@keyframes flicker-02 {
+    0% { opacity: 0.95; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0.95; }
+}
+
+.data-art-section {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    width: 25vw;
+    height: 30vh;
+    z-index: 49;
+    transform: translateX(2vw) skewX(-5deg);
+    transition: transform 0.1s ease-out;
+    pointer-events: none;
+}
+
+.data-art-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(to right,#ffd90000,#ffd700,#ffd90000);
+    opacity: 0.6;
+}
+
+.data-art-line.l1 {
+    top: 20vh;
+    left: 60vw;
+    width: 120%; 
+    animation: scan-line 4s linear infinite;
+}
+
+.data-art-line.l2 {
+    top: 39vh;
+    left: 70vw;
+    width: 75%; 
+    animation: scan-line 3.5s reverse linear infinite;
+}
+
+.data-art-line.l3 {
+    top: 65vh;
+    left: 70vw;
+    width: 75%; 
+    animation: scan-line 5s linear infinite;
+}
+
+.data-art-line.l4 {
+    top: 83vh;
+    left: 70vw;
+    width: 75%;    
+    animation: scan-line 4.5s reverse linear infinite;
+}
+
+.data-block {
+    position: absolute;
+    color: #ffd700;
+    font-size: 0.8vw;
+    line-height: 1;
+    font-family: monospace;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.4));
+    white-space: pre;
+    z-index: 9999;
+}
+
+.data-block.b1 {
+    top: 20vh;
+    left: 60vw;
+    animation: flicker 2s steps(1) infinite;
+}
+
+.data-block.b2 {
+    top: 40vh;
+    left: 60vw;
+    animation: flicker 3s steps(1) infinite;
+}
+
+.data-block.b3 {
+    top: 60vh;
+    left: 60vw;
+    animation: flicker 2.5s steps(1) infinite;
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 0.8;
+    }
+}

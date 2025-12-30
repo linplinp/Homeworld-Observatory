@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>標題｜Veins</title>
+
+    <link rel="icon" href="index/icon/矩形椎体_rectangular-vertebra.svg" type="image/x-icon">
+    <link rel="stylesheet" href="Veins/css/celestial motion.css">
+    <link rel="stylesheet" href="index/css/cursor.css">
+    <link rel="stylesheet" href="Veins/css/developer mode.css">
+    <link rel="stylesheet" href="Veins/css/log.css">
+    <link rel="stylesheet" href="Veins/css/style.css">
+    <link rel="stylesheet" href="Veins/css/page-jump.css">
+    <link rel="stylesheet" href="Veins/css/loading.css">
+    <link rel="stylesheet" href="Veins/css/menu.css">
+    <link rel="stylesheet" href="Veins/css/decoration.css">
+    <link rel="stylesheet" href="index/css/music.css">
+
+    <script src="Veins/js/nav-control.js" defer></script>
+    <script src="Veins/js/parallax.js" defer></script>
+    <script src="Veins/js/sound-effect.js" defer></script>
+    <script src="Veins/js/operation.js" defer></script>
+    <script src="index/js/page-jump.js" defer></script>
+    <script src="index/js/music.js" defer></script>
+
+</head>
+
+<body>
+    <!-- 加載音頻 -->
+    <audio id="loadSound" src="index/audio/open.mp3" preload="auto"></audio>
+    <audio id="click" src="index/audio/click.mp3" preload="auto"></audio>
+    <audio id="click" src="index/audio/click.mp3" preload="auto"></audio>
+    <audio id="scrollUp" src="index/audio/up.mp3" preload="auto"></audio>
+    <audio id="scrollDown" src="index/audio/down.mp3" preload="auto"></audio>
+    <audio id="hoverSound" src="index/audio/hover.mp3" preload="auto"></audio>
+
+
+    <div class="veins-bg"></div>
+    <input type="checkbox" id="nav">
+    <input type="checkbox" id="DeveloperMode">
+    <input type="checkbox" id="Hidden-display">
+    <input type="checkbox" id="toggle-menu">
+
+    <div class="topbar-section">
+        <div class="navbar "></div>
+    </div>
+
+    <div class="music-icon" id="musicIcon">
+        <img src="index/icon/光盘_record-disc.svg">
+    </div>
+    <audio id="bgMusic" src="index/audio/TheM_extended Version.mp3" loop autoplay volume="0"></audio>
+
+    <!-- orbit-container-1是右邊那顆 -->
+    <div class="orbit-container-1">
+        <div class="orbit-group"
+            style="--size: 90vh;--ring-border: 4px;--ball-size: 5vw;--speed: 18s;--skew:-10deg;--translateX: -38%;--dist:-7%;--orbit-opacity: 0.7;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 90vh;--ring-border: 4px;--ball-size: 0vw;--speed: 18s;--skew:50deg;--translateX: -135%;--dist:-7%;--orbit-opacity: 0.7;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder">
+                        <div class="ball">
+                            <div class="orbit-group"
+                                style="--size: 100vh;--ring-border: 5px;--skew:-45deg;--translateX:24vw;--orbit-opacity: 0.2;">
+                                <div class="move-ball-loader">
+                                    <div class="ball-ring" style="width: 0;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 74vh;--ring-border: 2px;--ball-size: 3vw;--speed: 26s;--skew:-10deg;--translateX: -35%;--dist:-6%;--orbit-opacity: 0.5;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 56vh;--ring-border: 3px;--ball-size: 4vw;--speed: 36s;--skew:-10deg;--translateX: -33%;--dist:-5%;--orbit-opacity: 0.2;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 100vh;--ring-border: 5px;--skew:-45deg;--translateX:24vw;--orbit-opacity: 0.6;">
+            <div class="move-ball-loader">
+                <div class="ball-ring" style="width: 0;"></div>
+            </div>
+        </div>
+
+        <div class="orbit-group"
+            style="--size: 110vh;--ring-border: 0px;--ball-size: 1vw;--speed: 30s;--skew:-10deg;--translateX: -38%;--dist:-7%;--orbit-opacity: 0.7;"
+            id="line">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 125vh;--ring-border: 13px;--ball-size: 5vw;--speed: 40s;--skew:-10deg;--translateX: -35%;--dist:-6%;--orbit-opacity: 0.3;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 150vh;--ring-border: 2px;--ball-size: 3vw;--speed: 260s;--skew:-10deg;--translateX: -35%;--dist:-6%;--orbit-opacity: 0.3;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 120vh;--ring-border: 2px;--ball-size: 3vw;--speed: 26s;--skew:-10deg;--translateX: -35%;--dist:-6%;--orbit-opacity: 0.2;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- orbit-container-2是左邊那顆 -->
+    <div class="orbit-container-2">
+        <div class="orbit-group"
+            style="--size: 70vh;--ring-border: 4px;--ball-size: 5vw;--speed: 18s;--skew:-10deg;--translateX: -38%;--dist:-7%;--orbit-opacity: 0.7;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 70vh;--ring-border: 4px;--ball-size: 0vw;--speed: 18s;--skew:50deg;--translateX: -135%;--dist:-7%;--orbit-opacity: 0.7;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder">
+                        <div class="ball">
+                            <div class="orbit-group"
+                                style="--size: 80vh;--ring-border: 5px;--skew:-45deg;--translateX:24vw;--orbit-opacity: 0.2;">
+                                <div class="move-ball-loader">
+                                    <div class="ball-ring" style="width: 0;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 54vh;--ring-border: 2px;--ball-size: 3vw;--speed: 26s;--skew:-10deg;--translateX: -35%;--dist:-6%;--orbit-opacity: 0.5;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 36vh;--ring-border: 3px;--ball-size: 4vw;--speed: 36s;--skew:-10deg;--translateX: -33%;--dist:-5%;--orbit-opacity: 0.2;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 80vh;--ring-border: 5px;--skew:-45deg;--translateX:24vw;--orbit-opacity: 0.6;">
+            <div class="move-ball-loader">
+                <div class="ball-ring" style="width: 0;"></div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 90vh;--ring-border: 0px;--ball-size: 1vw;--speed: 30s;--skew:-10deg;--translateX: -38%;--dist:-7%;--orbit-opacity: 0.7;"
+            id="line">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 105vh;--ring-border: 13px;--ball-size: 5vw;--speed: 40s;--skew:-10deg;--translateX: -35%;--dist:-6%;--orbit-opacity: 0.3;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 130vh;--ring-border: 2px;--ball-size: 3vw;--speed: 260s;--skew:-10deg;--translateX: -35%;--dist:-6%;--orbit-opacity: 0.3;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit-group"
+            style="--size: 160vh;--ring-border: 2px;--ball-size: 3vw;--speed: 26s;--skew:-10deg;--translateX: -35%;--dist:-6%;--orbit-opacity: 0.2;">
+            <div class="move-ball-loader">
+                <div class="ball-ring">
+                    <div class="ball-holder" style="animation-direction: reverse;">
+                        <div class="ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="magic-circle">
+        <div class="mc-01">
+            <img src="Veins/pic/magic_circle_p1.webp" alt="" class="mc-01-p1"
+                style="--speed:18s;animation-direction: reverse;">
+            <img src="Veins/pic/magic_circle_p2.webp" alt="" class="mc-01-p2"
+                style="--speed:16s;animation-direction: reverse;">
+            <img src="Veins/pic/magic_circle_p3.webp" alt="" class="mc-01-p3" style="--speed:16s">
+            <img src="Veins/pic/magic_circle_p1.webp" alt="" class="mc-01-p4"
+                style="--speed:18s;animation-direction: reverse;">
+            <img src="Veins/pic/magic_circle_p2.webp" alt="" class="mc-01-p5" style="--speed:16s">
+        </div>
+    </div>
+    <div class="interface">
+        <!-- <div class="navbar"></div> -->
+        <div class="bottombar"></div>
+        <label for="DeveloperMode" class="DeveloperMode">
+            <p>Developer Mode</p>
+        </label>
+
+        <!-- 漢堡選單的checkbox -->
+        <div class="tab-ores">
+            <input type="radio" id="tab-ore1" name="tab-ore">
+            <input type="radio" id="tab-ore2" name="tab-ore">
+            <input type="radio" id="tab-ore3" name="tab-ore">
+            <input type="radio" id="tab-ore4" name="tab-ore">
+            <input type="radio" id="tab-ore5" name="tab-ore">
+            <input type="radio" id="tab-ore6" name="tab-ore">
+            <input type="radio" id="tab-ore7" name="tab-ore">
+            <input type="radio" id="tab-ore8" name="tab-ore">
+            <input type="radio" id="tab-ore9" name="tab-ore">
+            <input type="radio" id="tab-ore10" name="tab-ore">
+            <input type="radio" id="tab-ore11" name="tab-ore">
+            <input type="radio" id="tab-ore12" name="tab-ore">
+            <input type="radio" id="tab-ore13" name="tab-ore">
+            <input type="radio" id="tab-ore14" name="tab-ore">
+            <input type="radio" id="tab-ore15" name="tab-ore">
+            <input type="radio" id="tab-ore16" name="tab-ore">
+
+
+
+            <!-- 漢堡選單 -->
+            <!-- 各自的圖片跟解說 -->
+            <div class="log-01">
+                <section>
+                    <div class="sliderwrapper">
+                        <div class="slider">
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/01_Igniferrosulfute-α/bg1.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider2" src="Veins/pic/ore/01_Igniferrosulfute-α/bg2.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider3" src="Veins/pic/ore/01_Igniferrosulfute-α/bg3.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider4" src="Veins/pic/ore/01_Igniferrosulfute-α/bg1.webp">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h1 class="log-title">&nbsp;&nbsp;Pyrocruorite</h1>
+                <p class="log-article-01-01">
+                    俗&emsp;&emsp;名：燼紅石 (Pyrocruorite)
+                    <br>分類編碼：Class II (Sulfides) - Type 04-R
+                    <br>學術描述：一種極不穩定的三斜晶系硫化鐵變體。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;其晶格內部捕獲了高能熱光子（Thermal Photons），
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;導致該礦物在常溫下表現出持續的放熱反應。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;核心區域呈現「假液態」流動特徵，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;實為高溫導致的晶格振動視覺化現象。
+                    <br>地質特徵：僅生成於地函熱柱（Mantle Plume）噴發後的冷凝帶，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;需特定壓力值以維持其熱能鎖定狀態。
+                </p>
+                <p class="log-article-01-02">晶體呈深紅色，內部有明顯的流動紋理 <br>彷彿封存了液態血液</p>
+                <p class="log-article-01-03">當岩漿中的硫化鐵在極高壓下捕獲了地熱能量 <br>並在噴發前夕迅速冷卻，熱能便會被鎖死在晶格中</p>
+                <div class="log-content-01">
+                    <img src="Veins/pic/ore/01_Igniferrosulfute-α/main-01.webp" alt="" class="log-img-01"
+                        id="log-img-01">
+                </div>
+            </div>
+            <div class="log-02">
+                <section>
+                    <div class="sliderwrapper">
+                        <div class="slider">
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/02_Levaluminosilicate/bg1.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider2" src="Veins/pic/ore/02_Levaluminosilicate/bg2.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider3" src="Veins/pic/ore/02_Levaluminosilicate/bg3.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider4" src="Veins/pic/ore/02_Levaluminosilicate/bg1.webp">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h1 class="log-title">Celestia-Aerolite</h1>
+                <p class="log-article-02-01">
+                    俗&emsp;&emsp;名：天青浮岩 (Celestia-Aerolite)
+                    <br>分類編碼：Class VIII (Silicates) - Type 09-Aero
+                    <br>學術描述：具罕見蜂巢狀納米孔隙結構的矽酸鹽。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;其電子雲分佈異常，導致與行星重力場產生弱排斥效應。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;孔隙內檢測到高濃度的惰性乙太氣體，是其抗風阻特性的主因。
+                    <br>地質特徵：常見於大氣層高處的懸浮岩層，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;推測是地殼碎片受磁場異常抬升後，經由平流層低溫結晶而成。
+                </p>
+                <p class="log-article-02-02">現代探險家若發現這種礦石，必須立刻用鉛網罩住 <br>否則一旦鬆土，礦石就會直接飛進太空消失</p>
+                <p class="log-article-02-03">呈現粉筆般的質地，顏色為淡藍至灰白 <br>該礦石始終保持常溫，且觸感乾澀，幾乎不吸水</p>
+                <div class="log-content-02">
+                    <img src="Veins/pic/ore/02_Levaluminosilicate/main-01.webp" alt="" class="log-img-02"
+                        id="log-img-02">
+                </div>
+            </div>
+            <div class="log-03">
+                <section>
+                    <div class="sliderwrapper">
+                        <div class="slider">
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/03_Chlorosanguine Resin/bg1.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/03_Chlorosanguine Resin/bg2.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/03_Chlorosanguine Resin/bg3.jpg">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/03_Chlorosanguine Resin/bg1.webp">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h1 class="log-title">Vitalis Amber</h1>
+                <p class="log-article-03-01">
+                    俗&emsp;&emsp;名：森脈琥珀 (Vitalis Amber)
+                    <br>分類編碼：Class X (Organic Compounds) - Type 12-Bio
+                    <br>學術描述：一種半晶體有機高分子聚合物。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;該物質並非單純的化石，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;而是一種具備休眠生物活性的「擬礦物」。
+                    <br>地質特徵：寄生於超古代巨型植物（Megflora）的木質部與韌皮部之間，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;屬於植物分泌的高濃度生命原液結晶。
+                </p>
+                <p class="log-article-03-02">分子鏈結構類似雙螺旋DNA</p>
+                <p class="log-article-03-03">對特定頻率的生物電訊號有趨光性反應<br>能促進碳基生物的細胞有絲分裂</p>
+                <div class="log-content-03">
+                    <img src="Veins/pic/ore/03_Chlorosanguine Resin/main-01.webp" alt="" class="log-img-03"
+                        id="log-img-03">
+                </div>
+            </div>
+            <div class="log-04">
+                <section>
+                    <div class="sliderwrapper">
+                        <div class="slider">
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/04_Bathypiezolumite/bg1.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider2" src="Veins/pic/ore/04_Bathypiezolumite/bg2.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider3" src="Veins/pic/ore/04_Bathypiezolumite/bg3.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider4" src="Veins/pic/ore/04_Bathypiezolumite/bg1.webp">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h1 class="log-title">Abyssal Piezocryst</h1>
+                <p class="log-article-04-01">
+                    俗&emsp;&emsp;名：淵洋藍晶 (Abyssal Piezocryst)
+                    <br>分類編碼：Class IV (Oxides) - Type 07-Deep
+                    <br>學術描述： 超高密度六方密堆積晶體。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;該礦物展現出極端正壓電效應，在高達8000大氣壓環境
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;晶格發生畸變從而釋放冷光。
+                    <br>地質特徵：板塊隱沒帶深處的海溝熱泉噴口，需高水壓才能保持穩定
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;出水後若無加壓艙保護會發生微觀裂解。
+                </p>
+                <p class="log-article-04-02">內部結構極度緻密，分子間距小於常規鈦酸鹽</p>
+                <p class="log-article-04-03">若無壓力維持，晶體會發出輕微的爆裂聲並產生細微裂紋 <br>（俗稱「減壓病」）</p>
+                <div class="log-content-04">
+                    <img src="Veins/pic/ore/04_Bathypiezolumite/main-01.webp" alt="" class="log-img-04" id="log-img-04">
+                </div>
+            </div>
+            <div class="log-05">
+                <section>
+                    <div class="sliderwrapper">
+                        <div class="slider">
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/05_Radio-Arsenolite/bg1.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider2" src="Veins/pic/ore/05_Radio-Arsenolite/bg2.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider3" src="Veins/pic/ore/05_Radio-Arsenolite/bg3.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider4" src="Veins/pic/ore/05_Radio-Arsenolite/bg1.webp">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h1 class="log-title">Necro-Jade</h1>
+                <p class="log-article-05-01">
+                    俗&emsp;&emsp;名：蝕骨翠玉 (Necro-Jade)
+                    <br>分類編碼：Class VII (Arsenates) - Type 15-Tox
+                    <br>學術描述：含劇毒砷酸根的鈾基單斜晶體。「油性光澤」
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;實為晶體表面吸附空氣中水分子形成的氫氟酸薄膜
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;具有極強的生物組織溶解性。
+                    <br>地質特徵：通常發現於時空亂流遺跡或高維度能量撞擊點
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;被認為是三維空間無法自然生成的「外維度物質」。
+                </p>
+                <p class="log-article-05-02">該礦物處於持續的α衰變過程中，同時釋放強酸性離子霧</p>
+                <p class="log-article-05-03">油性光澤實為晶體表面吸附空氣中水分子形成的氫氟酸（HF）薄膜 <br>具有極強的生物組織溶解性</p>
+                <div class="log-content-05">
+                    <img src="Veins/pic/ore/05_Radio-Arsenolite/main-01.webp" alt="" class="log-img-05" id="log-img-05">
+                </div>
+            </div>
+            <!-- 內容單元結構範例 第六顆 -->
+            <!-- 最外層 -->
+            <div class="log-06">
+                <!-- 輪播圖 -->
+                <section>
+                    <div class="sliderwrapper">
+                        <div class="slider">
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/06_Iso-Chronal Carbon/bg1.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider2" src="Veins/pic/ore/06_Iso-Chronal Carbon/bg2.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider3" src="Veins/pic/ore/06_Iso-Chronal Carbon/bg3.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider4" src="Veins/pic/ore/06_Iso-Chronal Carbon/bg1.webp">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- 標題 -->
+                <h1 class="log-title">Chronos Diamond</h1>
+                <!-- 內文 -->
+                <p class="log-article-06-01">
+                    俗&emsp; &emsp;名：恆金剛 (Chronos Diamond)
+                    <br>分類編碼：Class I ( Native Elements ) - Type 01-Time
+                    <br>學術描述：一種理論上不存在的超穩定碳同素異形體。
+                    <br>地質特徵：通常發現於時空亂流遺跡或高維度能量撞擊點，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;被認為是三維空間無法自然生成的「外維度物質」。
+                </p>
+                <p class="log-article-06-02">X射線繞射分析顯示其碳原子鍵結存在維度摺疊現象<br>導致局部區域的熵值（Entropy）恆定為零</p>
+                <p class="log-article-06-03">光線通過晶體時發生的折射率異常，實為光子在微觀時空曲率中的延遲效應</p>
+                <!-- 主圖片 -->
+                <div class="log-content-06">
+                    <img src="Veins/pic/ore/06_Iso-Chronal Carbon/main-01.webp" alt="" class="log-img-06"
+                        id="log-img-06">
+                </div>
+            </div>
+            <!-- 結束換下一顆  -->
+            <div class="log-07">
+                <section>
+                    <div class="sliderwrapper">
+                        <div class="slider">
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/07_Cryo-Hygrolite/bg1.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider2" src="Veins/pic/ore/07_Cryo-Hygrolite/bg2.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider3" src="Veins/pic/ore/07_Cryo-Hygrolite/bg3.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider4" src="Veins/pic/ore/07_Cryo-Hygrolite/bg1.webp">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h1 class="log-title">Frost-Weeping Ore</h1>
+                <p class="log-article-07-01">
+                    俗&emsp; &emsp;名：霜泣石 (Frost-Weeping Ore)
+                    <br>分類編碼：Class V (Nitrates) - Type 06-Cold
+                    <br>學術描述：具備強烈吸熱性質的四方晶系硝酸鹽。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;其晶格熱力學特性異常，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;能自發性地從環境中吸收熱能轉化為晶格勢能，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;導致表面溫度恆定維持在冰點以下，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;表面的「淚滴」乃是環境中的水蒸氣遇冷凝結現象。
+                    <br>地質特徵：極地永凍層深處的變質岩夾層中，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;通常與固態甲烷水合物（可燃冰）伴生。
+                </p>
+                <p class="log-article-07-02">空氣中的水氣會不斷在其表面凝結成水珠滑落，看起來就像石頭在哭泣</p>
+                <p class="log-article-07-03">其晶格具有「吸熱勢阱」，會主動吸收環境熱量來維持結構穩定</p>
+                <div class="log-content-07">
+                    <img src="Veins/pic/ore/07_Cryo-Hygrolite/main-01.webp" alt="" class="log-img-07" id="log-img-07">
+                </div>
+            </div>
+            <div class="log-08">
+                <section>
+                    <div class="sliderwrapper">
+                        <div class="slider">
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/08_Electro-Ferrite Resonance Ore/bg1.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider2" src="Veins/pic/ore/08_Electro-Ferrite Resonance Ore/bg2.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider3" src="Veins/pic/ore/08_Electro-Ferrite Resonance Ore/bg3.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider4" src="Veins/pic/ore/08_Electro-Ferrite Resonance Ore/bg1.webp">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h1 class="log-title">Thunder-Iron</h1>
+                <p class="log-article-08-01">
+                    俗&emsp; &emsp;名：雷鳴黑鐵 (Thunder-Iron)
+                    <br>分類編碼：Class IV (Oxides/Spinel Group) - Type 08-Mag
+                    <br>學術描述：富含自由電子的尖晶石族氧化鐵。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;導致表面溫度恆定維持在冰點以下。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;表面的「淚滴」乃是環境中的水蒸氣遇冷凝結現象。
+                    <br>地質特徵：極地永凍層深處的變質岩夾層中，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;通常與固態甲烷水合物（可燃冰）伴生。
+                </p>
+                <p class="log-article-08-02">富含鐵的岩層在數萬年間遭受數百萬次雷擊 <br>巨大的電流改變了鐵原子的磁疇排列，使其成為天然的超導體儲能裝置</p>
+                <p class="log-article-08-03">在雷雨天，這塊石頭會像引雷針一樣吸引閃電</p>
+                <div class="log-content-08">
+                    <img src="Veins/pic/ore/08_Electro-Ferrite Resonance Ore/main-01.webp" alt="" class="log-img-08"
+                        id="log-img-08">
+                </div>
+            </div>
+            <div class="log-09">
+                <section>
+                    <div class="sliderwrapper">
+                        <div class="slider">
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/09_Neuro-Crystalline Quartz/bg1.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider2" src="Veins/pic/ore/09_Neuro-Crystalline Quartz/bg2.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider3" src="Veins/pic/ore/09_Neuro-Crystalline Quartz/bg3.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider4" src="Veins/pic/ore/09_Neuro-Crystalline Quartz/bg1.webp">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h1 class="log-title">Oneiric Quartz</h1>
+                <p class="log-article-09-01">
+                    俗&emsp; &emsp;名：幻夢石英 (Oneiric Quartz)
+                    <br>分類編碼：Class IV (Silicates/Tectosilicates) - Type 11-Psy
+                    <br>學術描述：摻雜微量未知稀土元素的二氧化矽晶體。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;其晶體振盪頻率與人類大腦皮層的α波及θ波頻率重疊（4-30Hz）。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;該礦物具備壓電精神轉換特性，能將生物電訊號轉化為光譜變化。
+                    <br>地質特徵：地下溶洞中，受地磁異常與特定菌群代謝影響而沈澱形成的次生礦物。
+                </p>
+                <p class="log-article-09-02">隨持有者的腦波頻率改變：平靜時為藍，憤怒時為紅，恐懼時為紫</p>
+                <p class="log-article-09-03">生長於富含特定真菌（食夢菌）的地下洞窟。這些真菌分解生物的精神殘留物<br>分泌出特殊的矽酸鹽溶液，沉積形成晶體</p>
+                <div class="log-content-09">
+                    <img src="Veins/pic/ore/09_Neuro-Crystalline Quartz/main-01.webp" alt="" class="log-img-09"
+                        id="log-img-09">
+                </div>
+            </div>
+            <div class="log-10">
+                <section>
+                    <div class="sliderwrapper">
+                        <div class="slider">
+                            <div class="imgframe">
+                                <img id="slider1" src="Veins/pic/ore/10_Exo-Tungstite Alloy/bg1.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider2" src="Veins/pic/ore/10_Exo-Tungstite Alloy/bg2.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider3" src="Veins/pic/ore/10_Exo-Tungstite Alloy/bg3.webp">
+                            </div>
+                            <div class="imgframe">
+                                <img id="slider4" src="Veins/pic/ore/10_Exo-Tungstite Alloy/bg1.webp">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h1 class="log-title">Astral Tungsten</h1>
+                <p class="log-article-10-01">
+                    俗&emsp; &emsp;名：星骸鎢金 (Astral Tungsten)
+                    <br>分類編碼：Class I (Native Alloys) - Type 99-Void
+                    <br>學術描述：一種天然形成的鎢-銥合金。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;其金屬鍵中嵌入了無法解析的「虛空粒子」（Void Particles）。
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;這種結構導致其對魔力波（Mana Waves）具有極高的散射截面，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;形成物理上的「魔力絕緣體」。其熔點超越了常規週期表元素的極限。
+                    <br>地質特徵：來自太陽系外的隕石撞擊核心，
+                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;屬於在超新星爆炸或中子星碰撞極端環境下生成的簡併態物質殘骸。
+                </p>
+                <p class="log-article-10-02">暗紫色金屬，表面粗糙如砂紙，無法打磨光亮</p>
+                <p class="log-article-10-03">數十億年前撞擊地表的超新星核心殘骸<br>墜落過程中經大氣層燃燒，提煉出了宇宙中最耐高溫的合金</p>
+                <div class="log-content-10">
+                    <img src="Veins/pic/ore/10_Exo-Tungstite Alloy/main-01.webp" alt="" class="log-img-10"
+                        id="log-img-10">
+                </div>
+            </div>
+            <div class="log-11">
+                <div class="crt-overlay">
+                    <div class="scanlines"></div>
+                </div>
+            </div>
+            <div class="log-12">
+                <h1 class="log-title">Aeturnum</h1>
+                <div class="data-art-section" id="dataArtSection">
+                    <div class="data-art-line l1"></div>
+                    <div class="data-art-line l2"></div>
+                    <div class="data-art-line l3"></div>
+                    <div class="data-art-line l4"></div>
+                    <div class="data-block b1">
+                        Aeturnum
+
+                        Symbol: <i>Ae</i>
+
+                        Atomic Number: <i>120</i>
+
+                        Atomic Mass: <i>304.82</i>
+
+                        Classification: <i>Super-Alkaline Earth Metal</i>
+                    </div>
+                    <div class="data-block b2">
+                        Physical Properties:<i>Appearance:Presents
+                            an absolute matte gray color;
+                            completely non-reflective.</i>
+
+                        Characteristics: <i>Known as the "King of Inertness.
+                            "Its electron shell structure achieves
+                            a perfect closed-shell state,
+                            making it virtually unreactive with
+                            any substance
+                            (impervious even to Aqua Regia).
+                            It is the most stable substance in
+                            the known universe.</i>
+
+                        Mohs Hardness:<i>10.5</i>
+                    </div>
+                    <div class="data-block b3">
+
+
+
+                        Applications & Lore
+
+                        Industrial Code: <i>Anchor-01</i>
+
+                        Usage: <i>Used to manufacture cables for space
+                            elevators or the outer hulls of stellar probes.
+                            Within the lore, it symbolizes "eternity" and
+                            is used to craft imperial seals that are passed
+                            down for millennia.</i>
+                    </div>
+                </div>
+                <div class="log-content-12">
+                    <div class="scanlines mix"></div>
+                    <img src="Veins/pic/element/01_Aeturnum/Aeturnum2.webp" alt="" class="log-img-12" id="log-img-12">
+                </div>
+            </div>
+            <div class="log-13">
+                <h1 class="log-title">Phasium</h1>
+                <div class="data-art-section" id="dataArtSection">
+                    <div class="data-art-line l1"></div>
+                    <div class="data-art-line l2"></div>
+                    <div class="data-art-line l3"></div>
+                    <div class="data-art-line l4"></div>
+                    <div class="data-block b1">
+                        Phasium
+
+                        Symbol: <i>Ps</i>
+
+                        Atomic Number: <i>124</i>
+
+                        Atomic Mass: <i>312.05</i>
+
+                        Classification: <i>Transition Metal</i>
+
+                    </div>
+                    <div class="data-block b2">
+                        Physical Properties:<i>Appearance:A translucent silver
+                            metal; the edges always appear somewhat
+                            blurred.</i>
+
+                        Characteristics: <i>"Phase Instability." The electron cloud
+                            of this metal oscillates slightly between
+                            three-dimensional and four-dimensional space.
+                            This gives it an extremely low coefficient of
+                            friction, and under specific vibrational
+                            frequencies, it can even pass through
+                            ordinary matter.</i>
+
+                        Mohs Hardness:<i>10.5</i>
+                    </div>
+                    <div class="data-block b3">
+
+
+
+                        Applications & Lore
+
+                        Industrial Code: <i>Ghost-Alloy</i>
+
+                        Usage: <i>Material for high-tier assassin weaponry
+                            (capable of piercing armor), or as frictionless
+                            coatings for hyper-speed maglev trains.</i>
+
+                    </div>
+                </div>
+                <div class="log-content-13">
+                    <div class="scanlines mix"></div>
+                    <img src="Veins/pic/element/02_Phasium/Phasium2.webp" alt="" class="log-img-13" id="log-img-13">
+                </div>
+            </div>
+            <div class="log-14">
+                <h1 class="log-title">Ignarium</h1>
+                <div class="data-art-section" id="dataArtSection">
+                    <div class="data-art-line l1"></div>
+                    <div class="data-art-line l2"></div>
+                    <div class="data-art-line l3"></div>
+                    <div class="data-art-line l4"></div>
+                    <div class="data-block b1">
+                        Ignarium
+
+                        Symbol: <i>Ig</i>
+
+                        Atomic Number: <i>121</i>
+
+                        Atomic Mass: <i>308.9</i>
+
+                        Classification: <i>Super-Actinide</i>
+
+                    </div>
+                    <div class="data-block b2">
+                        Physical Properties:<i>Appearance:Presents
+                            an absolute matte gray color;
+                            completely non-reflective.</i>
+
+                        Characteristics: <i>Known as the "King of Inertness.
+                            "Its electron shell structure achieves
+                            a perfect closed-shell state,
+                            making it virtually unreactive with
+                            any substance
+                            (impervious even to Aqua Regia).
+                            It is the most stable substance in
+                            the known universe.</i>
+
+                        Mohs Hardness:<i>8.5</i>
+                    </div>
+                    <div class="data-block b3">
+
+
+
+                        Applications & Lore
+
+                        Industrial Code: <i>Anchor-01</i>
+
+                        Usage: <i>Used to manufacture cables for space
+                            elevators or the outer hulls of stellar probes.
+                            Within the lore, it symbolizes "eternity" and
+                            is used to craft imperial seals that are passed
+                            down for millennia.</i>
+                    </div>
+                </div>
+                <div class="log-content-14">
+                    <div class="scanlines mix"></div>
+                    <img src="Veins/pic/element/03_Ignarium/Ignarium2.webp" alt="" class="log-img-14" id="log-img-14">
+                </div>
+            </div>
+            <div class="log-15">
+                <h1 class="log-title">Neuridium</h1>
+                <div class="data-art-section" id="dataArtSection">
+                    <div class="data-art-line l1"></div>
+                    <div class="data-art-line l2"></div>
+                    <div class="data-art-line l3"></div>
+                    <div class="data-art-line l4"></div>
+                    <div class="data-block b1">
+                        Neuridium
+
+                        Symbol: <i>Ae</i>
+
+                        Atomic Number: <i>120</i>
+
+                        Atomic Mass: <i>304.82</i>
+
+                        Classification: <i>Biocompatible Metal</i>
+
+                    </div>
+                    <div class="data-block b2">
+                        Physical Properties:<i>Appearance:Appearance:A pearlescent,
+                            milky-white metal with excellent
+                            ductility.</i>
+
+                        Characteristics: <i>"Synaptic Simulation." The atomic arrangement
+                            of this metal naturally simulates the transmission
+                            of biological neural signals. It can seamlessly
+                            connect organic tissue with inorganic machinery
+                            without causing an immune rejection response.</i>
+
+                        Mohs Hardness:<i>4.3</i>
+                    </div>
+                    <div class="data-block b3">
+
+
+
+                        Applications & Lore
+
+                        Industrial Code: <i>Link-Metal</i>
+
+                        Usage: <i>Neural interface material for Cyborg prosthetics,
+                            or used to construct mecha cockpits that can be
+                            controlled directly by the pilot's mind.</i>
+
+                    </div>
+                </div>
+                <div class="log-content-15">
+                    <div class="scanlines mix"></div>
+                    <img src="Veins/pic/element/04_Neuridium/Neuridium2.webp" alt="" class="log-img-15" id="log-img-15">
+                </div>
+            </div>
+            <div class="log-16">
+                <h1 class="log-title">Gravium</h1>
+                <div class="data-art-section" id="dataArtSection">
+                    <div class="data-art-line l1"></div>
+                    <div class="data-art-line l2"></div>
+                    <div class="data-art-line l3"></div>
+                    <div class="data-art-line l4"></div>
+                    <div class="data-block b1">
+                        Gravium
+
+                        Symbol: <i>Gv</i>
+
+                        Atomic Number: <i>119</i>
+
+                        Atomic Mass: <i>315.2 (Anomalously Heavy)</i>
+
+                        Classification: <i>Super-Alkali Metal</i>
+
+                    </div>
+                    <div class="data-block b2">
+                        Physical Properties:<i>Appearance:Deep purple; placing it
+                            on a table causes the surface to dent
+                            slightly</i>
+
+                        Characteristics: <i>"Graviton Interaction." It has an extremely
+                            high density (5 times that of Osmium),
+                            and its atomic nucleus can weakly distort
+                            the surrounding gravitational field. Large
+                            chunks of Gravium produce a visible gravitational
+                            lensing effect.</i>
+
+                        Mohs Hardness:<i>12.5</i>
+                    </div>
+                    <div class="data-block b3">
+
+
+
+                        Applications & Lore
+
+                        Industrial Code: <i>Heavy-G</i>
+
+                        Usage:Used to manufacture artificial gravity generators,
+                        or as the core payload for the devastating
+                        "Gravitational Collapse Bomb."
+
+                    </div>
+                </div>
+                <div class="log-content-16">
+                    <div class="scanlines mix"></div>
+                    <img src="Veins/pic/element/05_Gravium/Gravium2.webp" alt="" class="log-img-16" id="log-img-16">
+                </div>
+            </div>
+        </div>
+        <!-- 元素切換部分 -->
+        <a>
+            <label for="toggle-menu" class="toggle-menu">
+                <p class="toggle-menu-p-01">Xenomorphic Veins</p>
+                <p class="toggle-menu-p-02">High-Dimensional Material Spectrum</p>
+            </label>
+        </a>
+
+        <div class="container-01" id="container-01">
+            <ul class="list">
+                <li>
+                    <label for="tab-ore1" class="log-button c1">
+                        <div class="log-text">Igniferrosulfute-α</div>
+                        <div class="log-text-sub">熱液硫化鐵-α</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore2" class="log-button c2">
+                        <div class="log-text">Levaluminosilicate</div>
+                        <div class="log-text-sub">負引力鋁矽酸鹽</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore3" class="log-button c3">
+                        <div class="log-text">Chlorosanguine Resin</div>
+                        <div class="log-text-sub">葉綠素聚合樹脂</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore4" class="log-button c4">
+                        <div class="log-text">Bathypiezolumite</div>
+                        <div class="log-text-sub">深層壓電鈦酸鋇</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore5" class="log-button c5">
+                        <div class="log-text">Radio-Arsenolite</div>
+                        <div class="log-text-sub">輻射砷鈾蝕變岩</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore6" class="log-button c6">
+                        <div class="log-text">Iso-Chronal Carbon</div>
+                        <div class="log-text-sub">時序同位素碳晶</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore7" class="log-button c7">
+                        <div class="log-text">Cryo-Hygrolite</div>
+                        <div class="log-text-sub">吸熱型硝酸銀晶</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore8" class="log-button c8">
+                        <div class="log-text" style="margin-left: 12vw;">Electro-Ferrite Resonance</div>
+                        <div class="log-text-sub">鐵磁共振導體</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore9" class="log-button c9">
+                        <div class="log-text" style="margin-left: 12vw;">Neuro-Crystalline Quartz</div>
+                        <div class="log-text-sub">神經響應石英</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore10" class="log-button c10">
+                        <div class="log-text">Exo-Tungstite Alloy</div>
+                        <div class="log-text-sub">虛空鎢銥合金</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore11" class="log-button c11">
+                        <div class="log-end">「It seems we have reached the end...」</div>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div class="container-02" id="container-02">
+            <ul class="list">
+                <li>
+                    <label for="tab-ore12" class="log-button c12">
+                        <div class="log-text-02">Aeturnum</div>
+                        <div class="log-text-sub-02">艾 特 諾</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore13" class="log-button c13">
+                        <div class="log-text-02">Phasium</div>
+                        <div class="log-text-sub-02">費 濟 姆</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore14" class="log-button c14">
+                        <div class="log-text-02">Ignarium</div>
+                        <div class="log-text-sub-02">伊格尼斯</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore15" class="log-button c15">
+                        <div class="log-text-02">Neuridium</div>
+                        <div class="log-text-sub-02">紐 瑞 迪</div>
+                    </label>
+                </li>
+                <li>
+                    <label for="tab-ore16" class="log-button c16">
+                        <div class="log-text-02">Gravium</div>
+                        <div class="log-text-sub-02">格拉維姆</div>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 導航菜單容器：原 .nav → .menu-nav -->
+    <div class="menu-nav">
+        <div class="menu-bgcolor"></div>
+        <div class="menu-navigation" id="menu-navigation">
+            <div class="menu-nav-item" data-url="index.html">
+                <a href="index.html" class="menu-nav-link" data-original="首頁">首頁 </a>
+                <span class="menu-nav-eng" data-original="△Lighthouse">△Lighthouse</span>
+                <img src="index/image/HOME.webp" data-original="首頁示意圖" class="menu-nav-image">
+                <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="menu-nav-graphic">
+                <div class="menu-nav-bg"></div>
+            </div>
+            <div class="menu-nav-item" data-url="veins.html">
+                <a href="veins.html" class="menu-nav-link" data-original="地脈 ">地脈 </a>
+                <span class="menu-nav-eng" data-original="△VEINS">△VEINS</span>
+                <img src="index/image/dimai.webp" data-original="地脈示意圖" class="menu-nav-image">
+                <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="menu-nav-graphic">
+                <div class="menu-nav-bg"></div>
+            </div>
+            <div class="menu-nav-item" data-url="ecological.html">
+                <a href="ecological.html" class="menu-nav-link" data-original="生態">生態 </a>
+                <span class="menu-nav-eng" data-original="△Ecological">△Ecological</span>
+                <img src="index/image/nat.webp" data-original="生態示意圖" class="menu-nav-image">
+                <img src="index/image/nav_Graphics.webp" data-original="輔助圖形" class="menu-nav-graphic">
+                <div class="menu-nav-bg"></div>
+            </div>
+        </div>
+        <a href="https://github.com/linplinp/final-project" target="_blank" class="menu-projects-btn" aria-label="查看项目">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M30.4417 5C32.406 5 34.265 5.44776 35.9207 6.24607L32.7172 9.42668C30.8706 11.2601 30.8706 14.2327 32.7172 16.0661C34.5638 17.8995 37.5578 17.8995 39.4044 16.0661L42.2571 13.2337C42.7379 14.5558 43 15.9818 43 17.4685C43 24.3547 37.3775 29.937 30.4417 29.937C28.7825 29.937 27.1985 29.6176 25.7486 29.0373L13.07 41.6253C11.2238 43.4582 8.2307 43.4582 6.38459 41.6253C4.53847 39.7924 4.53847 36.8207 6.38459 34.9877L18.9523 22.5099C18.2651 20.9684 17.8834 19.2627 17.8834 17.4685C17.8834 10.5823 23.5059 5 30.4417 5Z"
+                    fill="#D4AF37" stroke="#FFD700" stroke-width="4" stroke-linejoin="miter" />
+            </svg>
+        </a>
+    </div>
+
+    <!-- 導航按鈕：原 .nav-button → .menu-nav-button（與 CSS 匹配） -->
+    <label for="nav" class="menu-nav-button">
+        <p class="menu-nav-menu">☰</p> <!-- 原 .nav-menu → .menu-nav-menu -->
+        <p class="menu-nav-back">✖</p> <!-- 原 .nav-back → .menu-nav-back -->
+    </label>
+
+    <!--全部隱藏按鈕 -->
+    <label for="Hidden-display" class="Hidden-display">
+        <p>Hidden display</p>
+    </label>
+
+
+    <!-- 音效 -->
+    <audio src="sound/click.wav" id="click"></audio>
+
+    <!-- 轉場在這裡 -->
+    <div>
+        <div>
+            <div class="loading-bg"></div>
+            <div class="tech-ring-container ">
+                <div class="tech-ring outer"></div>
+                <div class="tech-ring middle"></div>
+                <div class="tech-ring inner"></div>
+                <div class="tech-ring"></div>
+                <div class="tech-ring inner"></div>
+                <div class="tech-ring inner-small"></div>
+                <div class="ring-decoration"></div>
+                <div class="ring-scanner"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+                <div class="data-point"></div>
+            </div>
+        </div>
+        <img rel="preload" src="Veins/pic/crt.webp" alt="" class="loading-img">
+        <div class="loading-bar"></div>
+        <div class="loading-text">100% SUCCEED</div>
+        <img src="Veins/pic/bluescreen crt.gif" alt="" class="crt-img">
+    </div>
+
+
+    <!-- 暈邊 -->
+    <div class="dark"></div>
+
+</body>
+
+</html>

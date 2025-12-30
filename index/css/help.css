@@ -1,0 +1,221 @@
+.help-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 95vh;
+    z-index: 9999;
+}
+
+.help-title{
+    position: relative;
+    color: #fffdf4;
+    font-size: 1.4vw;
+    font-family:  monospace;
+    padding: 0px;
+    margin: 10px;
+    text-align: center;
+    opacity: 0;
+    transition: all .3s ease 1s;
+
+}
+
+.help-title::before{
+    content: '';
+    position: absolute;
+    width: 25vw;
+    height: 1px;
+    background: #fffdf4;
+    border-radius: 30px;
+    top: 50%;
+    left: 0vw;
+    transform: translateY(-50%);
+}
+
+.help-title::after{
+    content: '';
+    position: absolute;
+    width: 25vw;
+    height: 1px;    
+    background: #fffdf4;
+    border-radius: 30px;
+    top: 50%;
+    right: 0vw;
+    transform: translateY(-50%);
+}
+
+.sliderwrapper{
+    position: relative; 
+    max-width: 70%;
+
+    height: 70vh;
+    background-color: rgb(38, 36, 35);    
+    padding: 2px 3px 3px 3px;
+    box-shadow: 0 1.5rem 3rem -0.75rem rgba(0, 0, 0, 0.5);
+    border-radius: 5px;  
+    transform: translateY(500%);
+    transition: transform .6s ease,
+                max-width .6s cubic-bezier(.53,.01,.38,.99) .6s;
+    z-index: 9995;
+}
+
+.slider{
+    display: flex;
+    overflow-x: auto;   
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory; 
+    scroll-behavior: initial ;    
+
+}
+
+.slider ::-webkit-scrollbar{
+    display: none;
+}
+
+.slider::scroll-button(right), .slider::scroll-button(left) {
+    border: none;
+    font-size: 4rem;
+    color: #b8b4c2;
+    background-color: transparent;
+    padding-bottom: .1rem;
+    cursor: pointer;
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%) scale(1);
+    opacity: 0.2;
+    transition: opacity 150ms cubic-bezier(.21,.89,.84,.14),
+                transform 300ms ease,
+                color 300ms ease;
+    z-index: 9995;
+}
+
+.slider::scroll-button(right):hover, .slider::scroll-button(left):hover{
+    opacity: 1;
+    color: #d5d5d5;
+    top: 50%;
+    transform:translateY(-50%) scale(1.1);
+}
+
+.slider::scroll-button(right):disabled, .slider::scroll-button(left):disabled{
+    opacity: 0;
+    cursor: auto;
+}
+
+.slider::scroll-button(right){
+    content:'\2771';
+    right: -3.5rem;
+}
+
+.slider::scroll-button(left){
+    content:'\2770';
+    left: -3.5rem;
+}
+
+.imgframe{
+    flex: 1 0 100%;           
+    scroll-snap-align: start; 
+    clip-path: polygon(20% 0, 80% 0, 85% 1%, 100% 1%, 100% 100%, 0 100%, 0 1%, 15% 1%);
+    opacity: 0;
+    transition: all .3s ease 1s;
+}
+
+.imgframe img {
+    display: block;
+    width: 100%;      
+    height: 100%;      
+    object-fit: cover;  
+}
+
+.help-black{
+    position: fixed;
+    width: 150vw;
+    height: 150vh;
+    padding: 20rem;
+    background: #000000ce;
+    backdrop-filter: blur(5px);
+    z-index: 9993;
+    display: none;
+
+}
+
+.help-button{
+    position: fixed;
+    font-size: 2.5svw;
+    color: #ffffff;
+    top: 6%;
+    left: 13%;
+    z-index: 9999;
+    transition: all .3s ease;
+    display: none;
+}
+
+.help-button::after{
+    content: '';
+    position: absolute;
+    background: rgb(227, 205, 36);
+    width: clamp(50px, 5vw, 50px);
+    height: clamp(50px, 5vw, 50px);
+    z-index: -1;
+    top: 20%;
+    left: -5%;
+    box-shadow: 0 0 50px -10px rgb(0, 0, 0);
+    transition: all .3s ease;
+}
+
+.help-button::before{
+    content: '';
+    position: absolute;
+    background: rgb(196, 177, 31);
+    width: clamp(50px, 5vw, 50px);
+    height: clamp(50px, 5vw, 50px);
+    z-index: -1;
+    top: 6%;
+    left: -40%;
+    box-shadow: 0 0 50px -10px rgb(0, 0, 0);
+    transition: all .3s ease;
+}
+
+.help-button:hover{
+    transform: scale(1.1);
+    color: #181715;
+}
+
+.help-button:hover::before,.help-button:hover::after{
+    background: rgb(255, 246, 177);
+
+    .help-button:hover::before{
+        left: -60%;
+    }
+}
+
+#help{
+    display: none;
+}
+
+
+#help:checked ~ .help-container .sliderwrapper{
+    transform: translateY(0%);
+    transition: transform .6s ease,
+                max-width .6s cubic-bezier(.53,.01,.38,.99) .6s;
+}
+
+#help:checked ~ .help-container .sliderwrapper .help-title{
+    opacity: 1;
+    transition: all .3s ease 1s;
+}
+
+#help:checked ~ .help-container .help-black{
+    display: block;
+    transition: all .3s ease;
+}
+
+#help:checked ~ .help .help-button{
+    display: block;
+    transition: all .3s ease;
+
+}
+
+#help:checked ~ .help-container .sliderwrapper .slider .imgframe{
+    opacity: 1;
+    transition: all .3s ease 1s;
+}
+

@@ -1,0 +1,29 @@
+/* 影片全螢幕容器 */
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    /* 確保在最頂層 */
+    display: none;
+    /* 初始隱藏 */
+    pointer-events: none;
+    /* 播放時若想讓滑鼠穿透點擊下方，可設為 none；若要擋住所有操作則不設 */
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+.video-overlay video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+}
+
+/* 當啟用時顯示 */
+.video-overlay.active {
+    display: flex;
+}

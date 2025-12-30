@@ -1,0 +1,291 @@
+/* 基礎樣式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    background-color: #000;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+html {
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* 頁面布局與容器樣式（非背景部分） */
+.scroll-container {
+    position: relative;
+    height: auto;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    margin: 0;
+    min-height: 100vh;
+    width: 100vw;
+    z-index: 1;
+}
+
+
+/* 背景容器基礎樣式 */
+.background-container,
+.desert-container,
+.ruins-container,
+.sky-container {
+    position: absolute;
+    top: -8vh;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.background-container {
+    z-index: -7;
+}
+
+
+/* 星空背景樣式 */
+.stars-video {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    min-width: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    animation: starFlow 60s linear infinite;
+    z-index: 0;
+}
+
+
+/* 窗框樣式（與背景關聯，需保持層級） */
+.window-frame {
+    position: absolute;
+    bottom: -20vh;
+    left: 0;
+    transform: translateY(-10%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.window-frame img {
+    width: 100vw;
+}
+
+
+/* 沙漠容器樣式 */
+.desert-container {
+    bottom: 0;
+    z-index: 2;
+}
+
+.desert-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: url("../image/desert.webp");
+    background-repeat: repeat-x;
+    background-size: 50% auto;
+    background-position: center bottom;
+    animation: desertMove 60s linear infinite;
+}
+
+
+/* 廢墟容器樣式 */
+.ruins-container {
+    bottom: 0;
+    z-index: 1;
+}
+
+.ruins-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: url("../image/feixu.webp");
+    background-repeat: repeat-x;
+    background-size: 50% auto;
+    background-position: center bottom;
+    animation: ruinsMove 240s linear infinite;
+}
+
+
+/* 天空容器樣式 */
+.sky-container {
+    top: -10vh;
+    z-index: 1;
+}
+
+.sky-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-image: url("index/image/sky.webp");
+    background-repeat: repeat-x;
+}
+
+
+/* 背景相關動畫 */
+@keyframes desertMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes ruinsMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes starFlow {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -40%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+
+/* 桌子相關樣式 */
+.desktop,
+.desktop-items>div {
+    transition: transform 0.2s ease-out;
+}
+
+.desktop {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 24vh;
+    z-index: 4;
+}
+
+.desktop-image {
+    margin: 0;
+    max-width: 100%;
+    height: 100%;
+    bottom: 0;
+    object-fit: cover;
+}
+
+.desktop-items {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12vw;
+    transition: ease-in-out;
+}
+
+.desktop-item {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    transform: scale(2.2);
+    margin: 20px;
+    bottom: 0;
+}
+
+.desktop-item:hover {
+    transform: scale(2.2);
+}
+
+.desktop-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 10;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.desktop-item::after {
+    content: none;
+}
+
+.desktop-item:hover::after {
+    opacity: 0;
+}
+
+.desktop-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    opacity: 0;
+    z-index: 11;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+.desktop-item:hover::before {
+    opacity: 1;
+}
+
+/* 桌面項目懸停效果圖片 */
+.ashtray-book::before {
+    background-image: url("../image/obj-l-2.webp");
+    transform: translateY(-6%);
+}
+
+.tablet::before {
+    background-image: url("../image/obj-c-2.webp");
+    transform: translateY(-6%);
+}
+
+.coffee-cup::before {
+    background-image: url("../image/obj-r-2.webp");
+    transform: translateY(-6%);
+}
+
+/* 桌面項目尺寸調整 */
+.tablet {
+    height: 10vh;
+    min-width: fit-content;
+    bottom: 0;
+}
+.tablet img {
+    height: 10vh;
+    min-width: 90 pt;
+    bottom: 0;
+}
+
+.ashtray-book {
+    width: 10vw;
+    right: 5vw;
+}
+
+.coffee-cup {
+    position: relative;
+    width: 6vw;
+    bottom: 1vh;
+}

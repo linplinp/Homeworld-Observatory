@@ -1,0 +1,40 @@
+/* ===== 音樂 icon ===== */
+.music-icon {
+    position: fixed;
+    top: 2vw;
+    right: 2vw;
+    z-index: 9991;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.music-icon:hover {
+    transform: scale(1.1);
+}
+
+.music-icon img.playing {
+    width: 100%;
+    height: 100%;
+    animation: rotate 3s linear infinite;
+    /* 持續旋轉 */
+}
+
+.music-icon.paused img {
+    animation-play-state: paused;
+    /* 暫停旋轉 */
+}
+
+/* 旋轉動畫 */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.music-icon img.playing {
+    animation: spin 3s linear infinite;
+}

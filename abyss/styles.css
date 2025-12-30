@@ -1,0 +1,1302 @@
+@charset "UTF-8";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  /* 禁止 body 捲動，避免雙重捲軸 */
+  overflow: hidden;
+}
+
+.ui-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  filter: hue-rotate(-10deg) saturate(60%) brightness(1.2) grayscale(0.3) drop-shadow(0 0 2px #ff1b1b) drop-shadow(0 0 5px #ffc20c);
+  opacity: 0.95;
+  pointer-events: none;
+  /* 讓滑鼠可以穿透框框去滑動網頁 */
+  z-index: 100;
+  /* 確保在最上層 */
+}
+
+.sphere {
+  position: fixed;
+  top: 18vh;
+  right: 3.5vw;
+  z-index: 99;
+
+  width: 200px;
+  height: 200px;
+
+  filter: drop-shadow(0 0 0.2px #ff8d1b) drop-shadow(0 0 1px #ffc20c);
+  transform: scale(0.8);
+
+  pointer-events: none;
+}
+
+/* 裡面的圖片：負責填滿容器 */
+.sphere img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* 保持圖片比例 */
+  display: block;
+}
+
+.sphere::after {
+  content: '';
+  position: absolute;
+  /* 記得加上絕對定位 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* 讓它置中 */
+
+  width: 110%;
+  height: 110%;
+
+  border: solid 5px #fff193;
+  box-shadow: 0 0 0.1px #ff1b1b, 0 0 5px #ffc20c;
+  border-radius: 10%;
+  corner-shape: bevel;
+
+  box-sizing: border-box;
+  z-index: 100;
+  /* 確保框在圖片上面 */
+}
+
+/* 外層容器：視窗大小與位置 */
+.code-log-container {
+  position: fixed;
+  top: 55vh;
+  /* 儀表板下方 */
+  right: 4.5vw;
+  z-index: 90;
+
+  /* 視窗高度：設定顯示幾行。這裡設為 6 行高 (1.5em * 6 = 9em) */
+  height: 13em;
+
+  overflow: hidden;
+  /* 隱藏視窗外的內容 */
+
+  text-align: right;
+  pointer-events: none;
+
+  border-right: 2px solid rgba(255, 241, 147, 0.5);
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.3) 70%, transparent);
+  padding-left: 10px;
+
+  /* 遮罩：讓頂部和底部的文字稍微淡出，更有科技感 */
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
+
+/* 捲動包覆層：負責移動 */
+.code-scroll-wrapper {
+  animation: scrollInfinite 1.3s steps(8) infinite;
+}
+
+/* 內容區塊設定 */
+.code-block {
+  color: #fff193;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5em;
+  /* 固定行高，確保 steps 計算準確 */
+  white-space: pre;
+  /* 保留換行 */
+  text-shadow: 0 0 5px #ff1b1b, 0 0 10px #ffc20c;
+  opacity: 0.9;
+}
+
+/* 無限捲動動畫 */
+@keyframes scrollInfinite {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+  /* 隱藏捲軸 */
+}
+
+.container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  /* 吸附功能 */
+  scroll-behavior: smooth;
+
+  grid-template-areas: "ground"
+    "crust"
+    "upper"
+    "mantle"
+    "outer"
+    "core"
+    "footer";
+  grid-template-rows: repeat(6, 100vh) auto;
+  grid-template-columns: 1fr;
+
+  scroll-marker-group: after;
+
+  scroll-timeline-name: --my-scroll;
+  scroll-timeline-axis: y;
+  /* 指定監聽垂直捲動 */
+}
+
+.container::scroll-marker-group {
+  display: flex;
+  flex-direction: column;
+  /* 改成垂直排列，像樓層簡介 */
+  gap: 1.4em;
+  /* 拉開一點間距 */
+  justify-content: center;
+  align-items: center;
+
+  /* 關鍵：使用 fixed 讓它懸浮在視窗上，不隨捲動跑掉 */
+  position: fixed;
+  top: 49.5vh;
+  /* 垂直置中 */
+  left: 5vw;
+  /* 靠左 5vw (跟你的按鈕位置對齊) */
+  transform: translate(0, -50%);
+  /* 修正垂直置中的偏移 */
+
+  z-index: 2000;
+  /* 確保層級夠高，不被背景蓋住 */
+}
+
+/* 修改這裡：美化每一個標記點 */
+.ground::scroll-marker,
+.crust::scroll-marker,
+.upper::scroll-marker,
+.mantle::scroll-marker,
+.outer::scroll-marker,
+.core::scroll-marker,
+.footer::scroll-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 24px;
+  height: 24px;
+
+  font-family: monospace;
+  color: #fff193;
+  text-shadow: 0 0 5px #ff1b1b, 0 0 10px #ffc20c;
+  font-size: 18px;
+  text-decoration: none;
+
+  background-color: transparent;
+  /* 平常是透明的，只留邊框 */
+  border: 3px solid #fff193;
+  border-radius: 50%;
+  /* 圓形 */
+  cursor: pointer;
+
+  /* 螢光質感 */
+  box-shadow: 0 0 5px #fff193;
+  transition: all 0.5s ease;
+  transform: translateX(-1000%);
+  opacity: 0;
+}
+
+.ground::scroll-marker {
+  content: '0';
+}
+
+.crust::scroll-marker {
+  content: '-1';
+}
+
+.upper::scroll-marker {
+  content: '-2';
+}
+
+.mantle::scroll-marker {
+  content: '-3';
+}
+
+.outer::scroll-marker {
+  content: '-4';
+}
+
+.core::scroll-marker {
+  content: '-5';
+}
+
+.footer::scroll-marker {
+  content: 'X';
+}
+
+#nav-button {
+  display: none;
+}
+
+#nav-button:checked~.ground::scroll-marker,
+#nav-button:checked~.crust::scroll-marker,
+#nav-button:checked~.upper::scroll-marker,
+#nav-button:checked~.mantle::scroll-marker,
+#nav-button:checked~.outer::scroll-marker,
+#nav-button:checked~.core::scroll-marker,
+#nav-button:checked~.footer::scroll-marker {
+  transition: all 0.5s ease;
+  transform: translateX(2.1vw);
+  opacity: 0.7;
+}
+
+#nav-button:checked~.ground::scroll-marker:hover,
+#nav-button:checked~.crust::scroll-marker:hover,
+#nav-button:checked~.upper::scroll-marker:hover,
+#nav-button:checked~.mantle::scroll-marker:hover,
+#nav-button:checked~.outer::scroll-marker:hover,
+#nav-button:checked~.core::scroll-marker:hover,
+#nav-button:checked~.footer::scroll-marker:hover {
+  transition: all 0.2s ease;
+  transform: translateX(2.1vw);
+  opacity: 1;
+}
+
+#nav-button:checked~.ground::scroll-marker:active,
+#nav-button:checked~.crust::scroll-marker:active,
+#nav-button:checked~.upper::scroll-marker:active,
+#nav-button:checked~.mantle::scroll-marker:active,
+#nav-button:checked~.outer::scroll-marker:active,
+#nav-button:checked~.core::scroll-marker:active,
+#nav-button:checked~.footer::scroll-marker:active {
+  transition: all 0.2s ease;
+  transform: translateX(2.1vw) scale(0.85);
+  color: #aeff00;
+  border: 3px solid #aeff00;
+  opacity: 1;
+}
+
+.container:has(#nav-button:checked)::scroll-button(up) {
+  transform: translateY(-18vh);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  /* 加個彈跳效果 */
+}
+
+.container:has(#nav-button:checked)::scroll-button(down) {
+  transform: translateY(18vh);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.container:has(#nav-button:checked)::scroll-button(up):active {
+  transform: translateY(-18vh);
+  color: #aeff00;
+  text-shadow: 0 0 20px #7bff00, 0 0 30px #00ffea;
+  transition: all 0.1s ease;
+}
+
+.container:has(#nav-button:checked)::scroll-button(down):active {
+  transform: translateY(18vh);
+  color: #aeff00;
+  text-shadow: 0 0 20px #7bff00, 0 0 30px #00ffea;
+  transition: all 0.1s ease;
+}
+
+.container:has(#nav-button:checked)::scroll-button(up):active {
+  transform: translateY(-18vh) scale(0.85);
+}
+
+.container:has(#nav-button:checked)::scroll-button(down):active {
+  transform: translateY(18vh) scale(0.85);
+}
+
+label p {
+  position: fixed;
+  top: 49.5vh;
+  left: 6.5vw;
+  transform: translateY(-50%) rotate(0);
+
+  opacity: 0.7;
+  font-size: 50px;
+  color: #fff193;
+  text-shadow: 0 0 5px #ff1b1b, 0 0 10px #ffc20c;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.5s ease;
+}
+
+label p:hover {
+  opacity: 1;
+}
+
+label p:active {
+  color: #aeff00;
+  text-shadow: 0 0 20px #7bff00, 0 0 30px #00ffea;
+  transition: all 0.1s ease;
+}
+
+#nav-button:checked~label p {
+  transform: translateX(3.5vw) translateY(-50%) rotate(540deg);
+
+  transition: all 0.5s ease;
+}
+
+.container::scroll-button(up),
+.container::scroll-button(down) {
+  border: none;
+  font-size: 6rem;
+  color: #ffe69d;
+  /* 跟原本風格一致的顏色 */
+  text-shadow: 0 0 15px #ff1b1b, 0 0 20px #ffc20c;
+  background-color: transparent;
+  cursor: pointer;
+
+  position: fixed;
+  /* 固定在視窗上，不隨內容捲動 */
+  left: 5vw;
+  /* 靠左 */
+  z-index: 100;
+  /* 確保浮在最上面 */
+
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+/* 定義向上按鈕 */
+.container::scroll-button(up) {
+  content: '\25b3';
+  /* 向上箭頭 (或是你自己喜歡的圖案) */
+  top: 35vh;
+  /* 定位在上方 */
+  transform: translateY(-10%);
+  transition: all 0.3s ease;
+}
+
+/* 定義向下按鈕 */
+.container::scroll-button(down) {
+  content: '\25bd';
+  /* 向下箭頭 */
+  bottom: 35vh;
+  /* 定位在下方 */
+  transform: translateY(10%);
+  transition: all 0.3s ease;
+}
+
+.container::scroll-button(down):hover,
+.container::scroll-button(up):hover {
+  opacity: 1;
+}
+
+.container::scroll-button(down):hover {
+  transform: translateY(10%);
+}
+
+.container::scroll-button(up):hover {
+  transform: translateY(-10%);
+}
+
+.container::scroll-button(down):active,
+.container::scroll-button(up):active {
+  color: #aeff00;
+  text-shadow: 0 0 20px #7bff00, 0 0 30px #00ffea;
+  transition: all 0.1s ease;
+}
+
+.container::scroll-button(up):active {
+  transform: translateY(-10%) scale(0.85);
+}
+
+.container::scroll-button(down):active {
+  transform: translateY(10%) scale(0.85);
+}
+
+.ground,
+.crust,
+.upper,
+.mantle,
+.outer,
+.core,
+.footer {
+  scroll-snap-align: start;
+
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.ground {
+  grid-area: ground;
+
+  background-image: linear-gradient(to top, black 0%, transparent 60%), url(pic/ground.webp);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  z-index: 3;
+}
+
+.ground h1 {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+
+  color: #fff193;
+  text-shadow: 0 0 10px #ff1b1b, 0 0 20px #ffc20c;
+  font-family: 'Courier New', monospace;
+}
+
+.crust {
+  grid-area: crust;
+
+  background-image: linear-gradient(to top, black 0%, transparent 50%, black 90%), url(pic/crust.webp);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.upper {
+  grid-area: upper;
+
+  background-image: linear-gradient(to top, rgb(36, 17, 17) 0%, transparent 50%, rgb(36, 17, 17) 90%), url(pic/upper.webp);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.mantle {
+  grid-area: mantle;
+
+  background-image: linear-gradient(to top, rgb(60, 25, 25) 0%, transparent 50%, rgb(60, 25, 25) 90%), url(pic/mantle.webp);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.outer {
+  grid-area: outer;
+
+  background-image: linear-gradient(to top, rgb(83, 22, 22) 0%, transparent 50%, rgb(83, 22, 22) 90%), url(pic/outer.webp);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.core {
+  grid-area: core;
+
+  background-image: linear-gradient(to top, rgb(101, 11, 11) 0%, transparent 50%, rgb(101, 11, 11) 95%), url(pic/core.webp);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: #a82121;
+  z-index: 10;
+}
+
+.footer h1 {
+  position: absolute;
+  top: 40vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+
+  color: #fff193;
+  font-size: 8vw;
+  white-space: nowrap;
+  text-shadow: 0 0 10px #ff1b1b, 0 0 20px #ffc20c;
+}
+
+.footer h2 {
+  position: absolute;
+  top: 60vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+
+  color: #fff193;
+  font-size: 5rem;
+  white-space: nowrap;
+  text-shadow: 0 0 10px #ff1b1b, 0 0 20px #ffc20c;
+}
+
+/* --- 警告跑馬燈外層容器 --- */
+.warning-tape {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  /* 跑馬燈的高度 */
+  overflow: hidden;
+  /* 把超出的部分藏起來 */
+  display: flex;
+  /*讓內部的內容橫向排列*/
+
+  /* 確保跑馬燈蓋在背景上*/
+  z-index: 30;
+}
+
+/* 上方跑馬燈的位置 */
+.top-tape {
+  top: 15%;
+  /* 調整這個數值來改變它距離頂部的距離 */
+}
+
+/* 下方跑馬燈的位置 */
+.bottom-tape {
+  bottom: 15%;
+  /* 調整這個數值來改變它距離底部的距離 */
+}
+
+/* --- 跑馬燈內容層 (負責移動) --- */
+.tape-content {
+  display: flex;
+  flex-shrink: 0;
+  /* 防止寬度被壓縮 */
+  align-items: center;
+  /* 垂直置中 */
+  justify-content: space-around;
+
+  /* 設定動畫：讓這條內容無限捲動 */
+  width: 100%;
+}
+
+/* 上方跑馬燈動畫：往右跑 */
+.top-tape .tape-content {
+  animation: scroll-right 4s linear infinite;
+}
+
+/* 下方跑馬燈動畫：往左跑 (反向) */
+.bottom-tape .tape-content {
+  animation: scroll-left 4s linear infinite;
+}
+
+/* --- 平行四邊形方塊 (span) --- */
+.tape-content span {
+  display: block;
+  width: 55px;
+  /* 方塊寬度 */
+  height: 100px;
+  /* 方塊高度 */
+  background-color: #fff193;
+  /* 你的主題黃色 */
+  margin: 0 15px;
+  /* 方塊之間的間距 */
+
+  /* 傾斜 -30度 變成平行四邊形 */
+  transform: skewX(-30deg);
+
+  /* 發光特效 */
+  box-shadow: 0 0 10px #ffc20c, 0 0 5px #ff1b1b;
+  opacity: 0.9;
+}
+
+/* --- 定義動畫 --- */
+
+/* 往左捲動 */
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* 往右捲動 */
+@keyframes scroll-right {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.svg-border {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  /* 寬度佔滿視窗 */
+  height: 100vh;
+  /* 高度佔滿視窗 */
+  z-index: 50;
+
+  pointer-events: none;
+  /* 讓滑鼠可以穿透框框去滑動網頁 */
+}
+
+.depth-counter {
+  position: fixed;
+  bottom: -1px;
+  left: 50vw;
+  transform: translateX(-50%);
+  /* 水平置中 */
+  width: 150px;
+  height: 150px;
+
+  z-index: 52;
+  /* 確保蓋在圓圈(50)和外框(51)上面 */
+  pointer-events: none;
+  /* 讓滑鼠穿透 */
+
+  /* 讓數字顯示在正中間 */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* 從上方開始對齊，避免垂直置中造成數字位置偏移 */
+
+  /* 遮罩效果：確保一次只看到一個數字，超出圓圈的藏起來 */
+  overflow: hidden;
+
+  /* 加一點上下漸層遮罩 */
+  mask-image: linear-gradient(to bottom, transparent 5%, black 20%, black 80%, transparent 95%);
+}
+
+.depth-strip {
+  display: flex;
+  flex-direction: column;
+  /* 垂直排列 */
+
+  /* 綁定捲動動畫 */
+  animation: depth-scroll linear both;
+  animation-timeline: --my-scroll;
+  /* 對應你的 container */
+}
+
+.depth-num {
+  /* 強制讓每個數字的高度都跟圓圈容器一樣高 */
+  height: 150px;
+  width: 150px;
+  /* 文字置中 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 字體風格 */
+  font-family: 'Courier New', monospace;
+  font-size: 3rem;
+  /* 字體大小 */
+  font-weight: 900;
+  /* 粗體 */
+  color: #fff193;
+
+  /* 發光特效 */
+  text-shadow: 0 0 10px #ff1b1b, 0 0 20px #ffc20c;
+}
+
+@keyframes depth-scroll {
+  from {
+    transform: translateY(0);
+    /* 顯示第一個數字 (0) */
+  }
+
+  to {
+    /* 往上移動到最後一個數字 (X)。
+           因為總共有 7 個數字，每個高度是 150px (100%)。
+           我們要移動 6 個單位的距離。
+           -150px * 6 = -900px
+        */
+    transform: translateY(-900px);
+  }
+}
+
+/* 左邊波浪：往右流動 */
+.wave-anim-left {
+  /* 讓它比容器寬，才有空間移動 */
+  width: 200%;
+  animation: wave-move-right 1s linear infinite;
+}
+
+/* 右邊波浪：往左流動 */
+.wave-anim-right {
+  width: 200%;
+  animation: wave-move-left 1s linear infinite;
+}
+
+/* 確保波浪線條有發光效果 */
+.svg-border use {
+  filter: drop-shadow(0 0 5px #ff1b1b) drop-shadow(0 0 10px #ffc20c);
+}
+
+/* 動畫關鍵影格：移動一個波長的距離 (20px) */
+@keyframes wave-move-right {
+  from {
+    transform: translateX(-20px);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes wave-move-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-20px);
+  }
+}
+
+.elevator-track {
+  /* 讓這個軌道從第 1 條線跨到最後 1 條線 (-1 代表最後) */
+  /* 這樣它的高度就會等於所有地層加起來的總高度 */
+  grid-column: 1 / -1;
+  grid-row: 2 / -2;
+
+  /* 讓它浮在背景圖片上面 */
+  z-index: 1;
+
+  /* 讓滑鼠點擊可以「穿透」軌道，才不會擋住背景的按鈕或文字 */
+  pointer-events: none;
+
+  /* 排版設定，讓電梯水平置中 */
+  display: flex;
+  justify-content: center;
+  /* 水平置中 (解決靠左問題) */
+  align-items: flex-start;
+  /* 確保高度不會被拉伸 (解決 Sticky 失效問題) */
+}
+
+.elevator-wrapper {
+  position: sticky;
+  top: 20%;
+  /* 距離視窗頂端 */
+
+  width: 160px;
+  height: 220px;
+}
+
+.elevator {
+  top: 50%;
+  transform: translateY(40%);
+  animation: float 2.5s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(40%);
+  }
+
+  50% {
+    transform: translateY(38%);
+  }
+}
+
+.elevator-wrapper svg {
+  overflow: visible;
+}
+
+.elevator1,
+.elevator2 {
+  stroke: #fff193;
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 2px #ff1b1b) drop-shadow(0 0 10px #ffc20c);
+}
+
+.elevator1 {
+  fill: url(#line-left);
+}
+
+.elevator2 {
+  fill: url(#line-right);
+  stroke-width: none;
+}
+
+.elevator-frame {
+  fill: none;
+  stroke: #fff193;
+  filter: drop-shadow(0 0 2px #ff1b1b) drop-shadow(0 0 10px #ffc20c);
+  stroke-width: 2px;
+}
+
+.gear {
+  fill: none;
+  stroke: #fff193;
+  filter: drop-shadow(0 0 2px #ff1b1b) drop-shadow(0 0 10px #ffc20c);
+  stroke-width: 4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.large-gear {
+  transform: scale(0.5) translate(15%, -25%);
+}
+
+.small-gear {
+  transform: scale(0.5) translate(80%, 8%);
+}
+
+.gear-spin-large {
+  animation: gear-spin 9s linear infinite;
+
+  /* 告訴瀏覽器基準點是「物件本身」的邊框 */
+  transform-box: fill-box;
+  /* 設定中心點 */
+  transform-origin: center;
+}
+
+.gear-spin {
+  animation: gear-spin-reverse 6s linear infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes gear-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gear-spin-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+
+}
+
+.elevatorline {
+  stroke: #fff193;
+  stroke-width: 3px;
+}
+
+/* --- CRT 螢幕特效 --- */
+
+.crt-overlay {
+  /* 霸佔整個視窗，不隨捲動跑掉 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  /* 讓滑鼠穿透這個層，才點得到下面的東西 */
+  pointer-events: none;
+
+  /* 確保它蓋在最上面 (比電梯還要高) */
+  z-index: 9999;
+
+  /* 暗角效果：四周變暗，模擬圓形映像管 */
+  background: radial-gradient(circle,
+      rgba(0, 0, 0, 0) 60%,
+      rgba(0, 0, 0, 0.4) 80%,
+      rgba(0, 0, 0, 0.8) 100%);
+
+  background-color: rgba(0, 255, 0, 0.05);
+  /* 整體綠色調 */
+  mix-blend-mode: overlay;
+  /* 讓顏色和下面內容混合 */
+}
+
+/* 掃描線層 */
+.scanlines {
+  width: 100%;
+  height: 100%;
+
+  /* 製作橫條紋 */
+  /* 使用重複線性漸層：透明 -> 黑色半透明 -> 透明 */
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.8) 50%,
+      /* a是線條深淺，可調整 */
+      rgba(0, 0, 0, 0.8));
+
+  /* 線條密度： N px 一個循環 */
+  background-size: 100% 5px;
+
+  /* 加入微微閃爍動畫 */
+  animation: flicker 0.15s infinite;
+}
+
+/* 閃爍動畫：模擬舊螢幕的不穩定電流 */
+@keyframes flicker {
+  0% {
+    opacity: 0.95;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0.95;
+  }
+}
+
+.scrollshow {
+  animation: scrollshow both;
+  animation-timeline: view(50% 0%);
+  animation-range: 0% cover 20%;
+}
+
+@keyframes scrollshow {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  /*稍微加粗一點，讓刻度明顯*/
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.3);
+  /* 軌道底色，半透明黑 */
+  border-bottom: 1px solid rgba(255, 200, 0, 0.3);
+  /* 底部加上淡淡的邊框 */
+}
+
+.progress-ticks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* 讓滑鼠穿透 */
+
+  /* ---  用漸層畫刻度 --- */
+  /* 畫一條線，然後剩下的部分透明 */
+  background: linear-gradient(to right, #000 3px, transparent 0);
+
+  /* 設定刻度間距：每 N% 出現一次 */
+  background-size: 1.3% 100%;
+
+  /* 讓刻度稍微透明一點，融合進背景 */
+  opacity: 0.5;
+  z-index: 1001;
+}
+
+.progressbar {
+  /* 讓它填滿軌道的高度 */
+  width: 100%;
+  height: 100%;
+
+  background-color: #ffd45f;
+  transform-origin: 0% 50%;
+  transform: scaleX(0);
+  /* 初始狀態 */
+
+  /* 這裡保留你的捲動動畫設定 */
+  animation: glowprogress linear both;
+  animation-timeline: --my-scroll;
+  /* 對應在 container 設定的名字 */
+
+  /* --- 發光效果 --- */
+  /* 第一層: 內部白光 (讓它看起來像燈管) */
+  /* 第二層: 外部黃光 */
+  /* 第三層: 外部紅光 (擴散) */
+  box-shadow:
+    inset 0 0 2px rgba(255, 255, 255, 0.8),
+    0 0 40px #ffc800,
+    0 0 30px #ff4500;
+}
+
+@keyframes glowprogress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.speedline-container {
+  position: fixed;
+  top: 35vh;
+  left: 51vw;
+
+  /* 垂直置中*/
+  transform: translate(-50%, -50%);
+
+  width: 250px;
+  height: 220px;
+
+  color: #ffd981;
+  text-shadow: 0 0 2px #ff1b1b, 0 0 10px #ffc20c;
+  font-size: 2rem;
+  /* 加大文字讓你更容易看到 */
+
+  z-index: 2;
+  pointer-events: none;
+
+  /* 選用：加個半透明背景色方便除錯，確定位置後再拿掉 */
+  mask-image: linear-gradient(to bottom, transparent 25%, black 40%, black 80%, transparent 95%);
+}
+
+.speedline-strip {
+  display: flex;
+  flex-direction: column;
+  will-change: animation, animation-timeline;
+  animation: speedline linear both 10s;
+  animation-timeline: --my-scroll;
+}
+
+@keyframes speedline {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-2300px);
+  }
+}
+
+.speedline-container p {
+  white-space: pre-wrap;
+  transform: scaleY(3.1) translateY(200%);
+  font-weight: 999;
+}
+
+/* 定義一個整數類型的 CSS 變數 */
+@property --depth-val {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+/* 右側儀表板容器 */
+.depth-gauge {
+  position: fixed;
+  top: 50vh;
+  right: 4.5vw;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 200;
+  pointer-events: none;
+}
+
+/* 數字顯示器 */
+.gauge-counter {
+  font-family: 'Courier New', monospace;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fff193;
+  text-shadow: 0 0 10px #ffc20c, 0 0 20px #ff1b1b;
+
+  /* 這裡綁定捲動動畫 */
+  animation: depth-counting linear both;
+  animation-timeline: --my-scroll;
+
+  /* 使用 counter 來顯示變數的值 */
+  counter-reset: depth var(--depth-val);
+}
+
+/* 偽元素負責把數字印出來 */
+.gauge-counter::after {
+  content: counter(depth) " km";
+
+  /* 確保數字等寬，像機械錶一樣不會跳來跳去 */
+  font-variant-numeric: tabular-nums;
+}
+
+/* 關鍵影格：定義每個地層對應的深度 */
+@keyframes depth-counting {
+
+  /* --- 0% 起點：地表 (Ground) --- */
+  0% {
+    --depth-val: 0;
+    opacity: 1;
+  }
+
+  /* 剛捲過 Ground (100vh) */
+  16.8% {
+    --depth-val: 17;
+    opacity: 1;
+  }
+
+  /* --- 33.3%：抵達上地函 (Upper) --- */
+  33.3% {
+    --depth-val: 400;
+    opacity: 1;
+  }
+
+  /* --- 50%：抵達下地函 (Mantle) --- */
+  50% {
+    --depth-val: 2000;
+    opacity: 1;
+  }
+
+  /* --- 66.6%：抵達外核 (Outer) --- */
+  66.6% {
+    --depth-val: 4015;
+    opacity: 1;
+  }
+
+  /* --- 83.3%：抵達核心 (Core) --- */
+  83.3% {
+    --depth-val: 5150;
+    opacity: 1;
+  }
+
+  /* --- 100%：抵達頁尾 (Footer) --- */
+  100% {
+    --depth-val: 9999;
+    opacity: 0;
+  }
+}
+
+/* 裝飾用的箭頭 */
+.gauge-arrow {
+  font-size: 2rem;
+  color: #ff796a;
+  text-shadow: 0 0 10px #ff8c00, 0 0 20px #ff0000;
+  animation: arrow-blink 1s infinite alternate;
+}
+
+.arrow-wrapper {
+  /* 綁定捲動動畫：讓整個容器在捲到底部時淡出 */
+  animation: fade-out-arrow linear both;
+  animation-timeline: --my-scroll;
+}
+
+/* --- 定義消失動畫 --- */
+@keyframes fade-out-arrow {
+
+  /* 0% ~ 85% (還沒到 Footer) 保持完全清楚 */
+  0%,
+  85% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* 86% ~ 100% (進入 Footer) 變成透明並隱藏 */
+  86%,
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    /* 確保滑鼠點不到，雖然它是裝飾 */
+  }
+}
+
+@keyframes arrow-blink {
+  from {
+    opacity: 0.8;
+    transform: translateX(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.title {
+  position: absolute;
+  top: 12vh;
+  left: 15vw;
+
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+
+  color: #fff7d5;
+  font-size: 5rem;
+  white-space: nowrap;
+  transform: skewX(11deg);
+  text-shadow: 0 0 10px #ff1b1b, 0 0 20px #ffc20c;
+}
+
+.title::before {
+  content: '';
+  position: fixed;
+  height: 50px;
+  width: 200px;
+  background-image: linear-gradient(to right, #ffc20c 30%, transparent);
+  transform: translate(-1vw, 6vh);
+  z-index: -1;
+}
+
+.info {
+  position: absolute;
+  top: 35vh;
+  left: 15vw;
+
+  color: #fff7d5;
+  font-size: 18px;
+  white-space: pre;
+  text-shadow: 0 0 10px #ff1b1b, 0 0 20px #ffc20c;
+  font-family: monospace;
+
+  z-index: 1000;
+}
+
+.info2 {
+  position: absolute;
+  top: 18vh;
+  right: 17vw;
+  text-align: right;
+
+  color: #ffdb0c;
+  font-size: 16px;
+  white-space: pre;
+  font-family: monospace;
+
+  z-index: 1000;
+}
+
+.info::before {
+  content: "“";
+
+  position: absolute;
+
+  top: -40px;
+  left: -30px;
+
+  font-size: 8rem;
+  color: #fff7d5;
+  opacity: 0.8;
+  z-index: -1;
+  font-family: monospace;
+}

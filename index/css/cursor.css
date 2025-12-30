@@ -1,0 +1,10 @@
+/* 鼠標樣式設置 */
+* {
+    transition: cursor 0.3s ease;
+    cursor: url('../icon/鼠標_普通.svg') 16 16, auto ;
+}
+
+/* 可选：单独强化 body 鼠标（确保页面根元素生效，双重保险） */
+body {
+    cursor: url('../icon/鼠標_普通.svg') 16 16, auto ;
+}

@@ -1,0 +1,791 @@
+/* 頁面裝飾效果 - 整體樣式與佈局 */
+/* 頁面兩側黑色暈影效果 */
+.page-vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+    background: linear-gradient(to right,
+            rgba(0, 0, 0, 0.5) 0%,
+            rgba(0, 0, 0, 0) 15%,
+            rgba(0, 0, 0, 0) 85%,
+            rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none;
+}
+
+/* 側邊條樣式 */
+.side-bar {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 0.8vw;
+    background-color: #000;
+    z-index: 999;
+}
+
+.side-bar.left {
+    left: 0;
+}
+
+.side-bar.right {
+    right: 0;
+}
+
+/* 開發者模式樣式 */
+.DeveloperMode {
+    position: fixed;
+    width: fit-content;
+    bottom: 30px;
+    left: 30px;
+    z-index: 100;
+    color: #ffd700;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+.DeveloperMode p{
+    font-family: monospace;
+    font-size: 0.9vw;
+}
+
+.DeveloperMode:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    background-color: rgba(255, 215, 0, 0.1);
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.7),
+        0 0 12px rgba(255, 215, 0, 0.5);
+}
+
+#DeveloperMode {
+    display: none;
+}
+
+#DeveloperMode:checked~.DeveloperMode {
+    background-color: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#DeveloperMode:checked~* {
+    * {
+        border: #ffffff 1px solid;
+    }
+}
+
+/* 問題提示區域樣式 */
+.problem-section {
+    position: absolute;
+    transform: translateX(4vw) skewX(2deg) rotate(0deg);
+    width: 20vw;
+    height: auto;
+    top: 20%;
+    z-index: 7;
+    margin: 0;
+    transition: transform 0.1s ease-out;
+}
+
+.problem-image-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.howdo-image.main {
+    transform: translateY(70%);
+    position: relative;
+    width: 120%;
+    z-index: 51;
+    height: auto;
+    object-fit: contain;
+}
+
+.howdo-image.sub {
+    position: absolute;
+    transform: skewX(10deg) scale(1.2);
+    top: 0;
+    left: 0;
+    z-index: 9;
+    width: 50%;
+    height: auto;
+    animation: rotate 10s linear infinite;
+    object-fit: contain;
+}
+
+.howdo-image.sub2 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 48%;
+    height: auto;
+    z-index: 52;
+    transform: skewX(-5deg) scale(1.4) translateY(110%) translateX(15%);
+    transition: ease-in-out 0.3s;
+    object-fit: contain;
+    pointer-events: auto;
+}
+
+.howdo-image.sub2:hover {
+    transform: skewX(-5deg) scale(1.45) rotate(1deg) translateY(110%) translateX(35%);
+}
+
+/* 數據美術裝飾區樣式 */
+.data-art-section {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    width: 25vw;
+    height: 30vh;
+    z-index: 8;
+    transform: translateX(2vw) skewX(-5deg);
+    transition: transform 0.1s ease-out;
+    pointer-events: none;
+}
+
+.data-art-line {
+    position: absolute;
+    height: 1px;
+    background: #ffd700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    opacity: 0.6;
+}
+
+.data-art-line.l1 {
+    top: 10%;
+    width: 100%;
+    animation: scan-line 4s linear infinite;
+}
+
+.data-art-line.l2 {
+    top: 30%;
+    width: 70%;
+    animation: scan-line 3.5s reverse linear infinite;
+}
+
+.data-art-line.l3 {
+    top: 60%;
+    width: 85%;
+    animation: scan-line 5s linear infinite;
+}
+
+.data-art-line.l4 {
+    top: 85%;
+    width: 50%;
+    animation: scan-line 4.5s reverse linear infinite;
+}
+
+.data-block {
+    position: absolute;
+    color: #ffd700;
+    font-size: 0.8vw;
+    line-height: 1;
+    font-family: monospace;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.4));
+    white-space: pre;
+}
+
+.data-block.b1 {
+    top: 15%;
+    left: 5%;
+    animation: flicker 2s steps(1) infinite;
+}
+
+.data-block.b2 {
+    top: 40%;
+    left: 30%;
+    animation: flicker 3s steps(1) infinite;
+}
+
+.data-block.b3 {
+    top: 75%;
+    left: 10%;
+    animation: flicker 2.5s steps(1) infinite;
+}
+
+/* 高科技大圓環裝飾樣式 */
+.tech-ring-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 90vw;
+    z-index: 4;
+    pointer-events: none;
+    animation: rotateRing 60s linear infinite, breatheRing 20s ease-in-out infinite;
+}
+
+.tech-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1.5pt solid rgba(255, 215, 0, 0.1);
+    background: radial-gradient(circle, transparent 50%,
+            rgba(255, 215, 0, 0.03) 100%);
+}
+
+.tech-ring.inner {
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+    border-style: dashed;
+    border-width: 2pt;
+}
+
+.tech-ring.inner-small {
+    width: 40%;
+    height: 40%;
+    top: 30%;
+    left: 30%;
+    border-style: dotted;
+    border-width: 1pt;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.ring-decoration {
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    border-radius: 50%;
+    width: 10vw;
+    height: 10vw;
+    margin: 0;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    background: transparent;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    pointer-events: none;
+    animation: ring-decoration 7.5s infinite ease-in-out;
+}
+
+/* 測距容器樣式 */
+.distance-container {
+    position: fixed;
+    top: 50%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.distance-container .distance-line {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 20vw;
+    height: 1px;
+    background: linear-gradient(to right,
+            rgba(255, 215, 0, 0.8),
+            rgba(255, 215, 0, 0.4) 50%,
+            rgba(255, 215, 0, 0));
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    transform: translateY(-50%);
+    animation: linePulse 2s infinite ease-in-out;
+}
+
+.distance-container .distance-marker {
+    position: absolute;
+    top: 50%;
+    height: 6px;
+    width: 1px;
+    background-color: #ffd700;
+    transform: translateY(-50%);
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
+    animation: markerPulse 3s infinite ease-in-out;
+}
+
+.distance-container .distance-marker.m1 {
+    right: -5vw;
+    height: 6px;
+    animation-delay: 0s;
+}
+
+.distance-container .distance-marker.m2 {
+    right: -10vw;
+    height: 10px;
+    animation-delay: 0.5s;
+}
+
+.distance-container .distance-marker.m3 {
+    right: -15vw;
+    height: 8px;
+    animation-delay: 1s;
+}
+
+.distance-container .distance-value {
+    position: absolute;
+    top: calc(50% + 10px);
+    color: rgba(255, 215, 0, 0.9);
+    font-family: monospace;
+    font-size: 0.8vw;
+    transform: translateY(-50%);
+    text-shadow: 0 0 3px rgba(255, 215, 0, 0.5);
+    animation: valueFlicker 4s infinite ease-in-out;
+}
+
+.distance-container .distance-value.v1 {
+    right: -5vw;
+}
+
+.distance-container .distance-value.v2 {
+    right: -10vw;
+    font-size: 0.9vw;
+    font-weight: bold;
+}
+
+.distance-container .distance-value.v3 {
+    right: -15vw;
+}
+
+.distance-container .distance-origin {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: #ffd700;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    animation: originPulse 1.5s infinite ease-in-out;
+}
+
+/* 數據點裝飾樣式 */
+.data-point {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #ffd700;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+    animation: pulse 3s infinite ease-in-out;
+}
+
+.data-point:nth-child(9) {
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0s;
+}
+
+.data-point:nth-child(10) {
+    top: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0.5s;
+}
+
+.data-point:nth-child(11) {
+    top: 50%;
+    left: 15%;
+    transform: translateY(-50%);
+    animation-delay: 1s;
+}
+
+.data-point:nth-child(12) {
+    top: 50%;
+    left: 85%;
+    transform: translateY(-50%);
+    animation-delay: 1.5s;
+}
+
+.data-point:nth-child(13) {
+    top: 25%;
+    left: 25%;
+    animation-delay: 2s;
+}
+
+.data-point:nth-child(14) {
+    top: 25%;
+    left: 75%;
+    animation-delay: 2.5s;
+}
+
+.data-point:nth-child(15) {
+    top: 75%;
+    left: 25%;
+    animation-delay: 3s;
+}
+
+.data-point:nth-child(16) {
+    top: 75%;
+    left: 75%;
+    animation-delay: 3.5s;
+}
+
+/* 演出圖標裝飾樣式 */
+.performance-icon {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.performance-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    transition: all 0.3s ease;
+}
+
+/* 桌面物品裝飾效果 */
+.ashtray-smoke {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 80px;
+    pointer-events: none;
+}
+
+.ashtray-smoke-particle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    filter: blur(3px);
+    animation: smokeRise 4s infinite ease-in-out;
+}
+
+.ashtray-smoke-particle:nth-child(1) {
+    width: 12px;
+    height: 12px;
+    left: 10px;
+    animation-delay: 0s;
+}
+
+.ashtray-smoke-particle:nth-child(2) {
+    width: 18px;
+    height: 18px;
+    left: 25px;
+    animation-delay: 0.8s;
+}
+
+.ashtray-smoke-particle:nth-child(3) {
+    width: 10px;
+    height: 10px;
+    left: 18px;
+    animation-delay: 1.5s;
+}
+
+.ashtray-smoke-particle:nth-child(4) {
+    width: 15px;
+    height: 15px;
+    left: 5px;
+    animation-delay: 2.2s;
+}
+
+/* 咖啡杯蒸汽裝飾樣式 */
+.steam {
+    position: absolute;
+    top: -20px;
+    left: 40%;
+    transform: translateX(-65%);
+    width: 40px;
+    height: 60px;
+    pointer-events: none;
+}
+
+.steam-particle {
+    position: absolute;
+    background-color: rgba(245, 245, 245, 0.4);
+    border-radius: 50%;
+    filter: blur(2px);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    animation: rise 3s infinite ease-in-out;
+}
+
+.steam-particle:nth-child(1) {
+    width: 15px;
+    height: 15px;
+    left: 10px;
+    animation-delay: 0s;
+    filter: blur(2px);
+}
+
+.steam-particle:nth-child(2) {
+    width: 20px;
+    height: 20px;
+    left: 25px;
+    animation-delay: 0.5s;
+    filter: blur(3px);
+}
+
+.steam-particle:nth-child(3) {
+    width: 10px;
+    height: 10px;
+    left: 18px;
+    animation-delay: 1s;
+    filter: blur(1.5px);
+}
+
+/* 動畫關鍵幀定義 */
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: skewX(10deg) scale(1.2) rotate(0deg);
+    }
+
+    to {
+        transform: skewX(10deg) scale(1.2) rotate(360deg);
+    }
+}
+
+@keyframes scan-line {
+    0% {
+        transform: translateX(0);
+        background: linear-gradient(to right, rgba(255, 215, 0, 0), #ffd700 50%, rgba(255, 215, 0, 0));
+    }
+
+    50% {
+        transform: translateX(20%);
+        background: linear-gradient(to right, rgba(255, 215, 0, 0), #ffd700 70%, rgba(255, 215, 0, 0));
+    }
+
+    100% {
+        transform: translateX(0);
+        background: linear-gradient(to right, rgba(255, 215, 0, 0), #ffd700 50%, rgba(255, 215, 0, 0));
+    }
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes rotateRing {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+}
+
+@keyframes breathe {
+    0% {
+        transform: translateX(3vw) scale(1.7);
+    }
+
+    50% {
+        transform: translateX(3vw) scale(1.8);
+    }
+
+    100% {
+        transform: translateX(3vw) scale(1.7);
+    }
+}
+
+@keyframes smokeRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+    }
+
+    30% {
+        transform: translateY(-20px) scale(1.2);
+        opacity: 0.5;
+    }
+
+    60% {
+        transform: translateY(-40px) scale(1.4);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(-60px) scale(1.6);
+        opacity: 0;
+    }
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-25px) scale(1.2);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(-50px) scale(1.4);
+        opacity: 0.2;
+    }
+}
+
+@keyframes breatheRing {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) rotate(180deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes linePulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    }
+
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+    }
+}
+
+@keyframes ring-decoration {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: scale(1.2);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes markerPulse {
+
+    0%,
+    100% {
+        height: 6px;
+        opacity: 0.7;
+    }
+
+    50% {
+        height: 12px;
+        opacity: 1;
+    }
+}
+
+@keyframes valueFlicker {
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    20%,
+    80% {
+        opacity: 1;
+    }
+}
+
+@keyframes originPulse {
+
+    0%,
+    100% {
+        transform: translateY(-50%) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-50%) scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* 全局入場動畫樣式 */
+body {
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.animate-in {
+    opacity: 1;
+}
+
+.transition-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    transform-origin: top;
+    transform: scaleY(1);
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1) 0.3s;
+}
+
+.transition-elements.hidden {
+    transform: scaleY(0);
+}
+
+.container>* {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.container>*.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}

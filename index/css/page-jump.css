@@ -1,0 +1,40 @@
+
+/* 全局入場動畫樣式 */
+body {
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.animate-in {
+    opacity: 1;
+}
+
+.transition-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffd700;
+    z-index: 9999;
+    transform-origin: top;
+    transform: scaleY(1);
+    /* 預設遮住全螢幕 */
+    transition: 0.3s;
+}
+
+.transition-elements.hidden {
+    transform: scaleY(0);
+    /* 收起動畫 */
+}
+
+.container>* {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.container>*.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}

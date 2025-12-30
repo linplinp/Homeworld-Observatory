@@ -1,0 +1,37 @@
+#DeveloperMode{
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.DeveloperMode{
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 100;
+    color: #ffd700;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+#DeveloperMode:checked ~ *{
+    *{
+        border: #ffffff 1px solid;
+    }
+
+     .DeveloperMod{
+        color: rgb(227, 205, 36);
+        transform: scale(1.1);
+        -webkit-text-stroke-width: 0px;
+    }
+}
+.DeveloperMode:hover{
+    opacity: 1;
+    background-color: rgba(255, 215, 0, 0.1);
+}
